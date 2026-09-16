@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Futniture End Fitting | Premium Furniture & Interior Fittings</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FFFFFF;
+      color: #1E1E1E;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, .logo, .hero-headline {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.02);
+      z-index: 1000;
+      padding: 16px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #2C2C2C;
+    }
+    .logo span {
+      color: #C87A3E;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2C2C2C;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #C87A3E;
+    }
+    .mobile-menu {
+      display: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem 0;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .mobile-menu {
+        display: block;
+      }
+      .header-inner {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Buttons */
+    .btn-primary, .btn-secondary, .btn-outline {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary {
+      background: #1E1E1E;
+      color: white;
+      border: 1px solid #1E1E1E;
+    }
+    .btn-primary:hover {
+      background: #C87A3E;
+      border-color: #C87A3E;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #1E1E1E;
+      border: 1px solid #1E1E1E;
+    }
+    .btn-secondary:hover {
+      background: #1E1E1E;
+      color: white;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #C87A3E;
+      color: #C87A3E;
+    }
+    .btn-outline:hover {
+      background: #C87A3E;
+      color: white;
+    }
+    .btn-block {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .section-sub {
+      text-align: center;
+      color: #5A5A5A;
+      max-width: 680px;
+      margin: 0 auto 48px auto;
+    }
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 30px;
+    }
+    .grid-2 { grid-template-columns: repeat(2,1fr); }
+    .grid-3 { grid-template-columns: repeat(3,1fr); }
+    .grid-4 { grid-template-columns: repeat(4,1fr); }
+    @media (max-width: 992px) {
+      .grid-3, .grid-4 { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 640px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      section { padding: 60px 0; }
+      .section-title { font-size: 2rem; }
+    }
+
+    /* Cards */
+    .service-card, .benefit-card, .process-step, .material-card, .testimonial-card, .project-card {
+      background: #FFFFFF;
+      padding: 28px;
+      border-radius: 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+      transition: all 0.25s;
+      border: 1px solid #EFEFEF;
+    }
+    .service-card i, .benefit-card i {
+      font-size: 2rem;
+      color: #C87A3E;
+      margin-bottom: 20px;
+    }
+    .service-card h3, .benefit-card h3 {
+      margin-bottom: 12px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #FCF9F5 0%, #FFFFFF 100%);
+    }
+    .hero-content {
+      max-width: 700px;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero-bullets {
+      list-style: none;
+      margin: 24px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .hero-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Instagram Carousel */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      margin-top: 20px;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .carousel-slide {
+      flex: 0 0 100%;
+      position: relative;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      display: block;
+    }
+    .carousel-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-size: 1.4rem;
+    }
+    .carousel-btn.prev { left: 16px; }
+    .carousel-btn.next { right: 16px; }
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .dot.active {
+      background: #C87A3E;
+    }
+    @media (max-width: 768px) {
+      .carousel-slide img { height: 320px; }
+    }
+
+    /* Before/After Gallery cards */
+    .project-card {
+      text-align: center;
+    }
+    .project-card .image-compare {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .project-card .image-compare img {
+      width: 50%;
+      border-radius: 16px;
+      object-fit: cover;
+      height: 160px;
+    }
+
+    /* Process Steps */
+    .process-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .process-step {
+      flex: 1;
+      text-align: center;
+      min-width: 150px;
+    }
+    .step-number {
+      background: #C87A3E20;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      border-radius: 60px;
+      margin: 0 auto 16px;
+      font-weight: bold;
+      color: #C87A3E;
+    }
+
+    /* FAQ Accordion */
+    .faq-item {
+      border-bottom: 1px solid #eaeaea;
+      margin-bottom: 8px;
+    }
+    .faq-question {
+      background: none;
+      width: 100%;
+      text-align: left;
+      padding: 20px 0;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      border: none;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s;
+      color: #5A5A5A;
+      padding-bottom: 0;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding-bottom: 20px;
+    }
+
+    /* Trust bar */
+    .trust-bar {
+      background: #F8F6F2;
+      padding: 40px 0;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .trust-item i {
+      font-size: 2rem;
+      color: #C87A3E;
+      margin-bottom: 8px;
+    }
+    .trust-item span {
+      font-weight: 700;
+      font-size: 1.3rem;
+      display: block;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      max-width: 500px;
+      width: 90%;
+      border-radius: 32px;
+      padding: 32px;
+      position: relative;
+    }
+    .modal-content input, .modal-content textarea, .modal-content input[type="file"] {
+      width: 100%;
+      margin: 12px 0;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 16px;
+    }
+    .close-modal {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* Floating WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      z-index: 1100;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.05);
+      background: #20b859;
+    }
+    .floating-quote {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: #1E1E1E;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      z-index: 1100;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    footer {
+      background: #111111;
+      color: #ccc;
+      padding: 48px 0 24px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .social-icons a {
+      color: white;
+      margin-right: 16px;
+      font-size: 1.4rem;
+    }
+
+    hr {
+      margin: 24px 0;
+    }
+
+    /* ===== NEW BG IMAGE STYLES (only added these) ===== */
+    .hero-bg {
+      background-image: url('https://i.pinimg.com/736x/68/2c/e4/682ce44861ea43396f31f9f73788208a.jpg?w=1600&auto=format');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      isolation: isolate;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: -1;
+    }
+    .hero-bg .hero-content,
+    .hero-bg .hero-buttons,
+    .hero-bg .hero-bullets,
+    .hero-bg p,
+    .hero-bg h1 {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
+    .hero-bg .hero-bullets i {
+      color: #C87A3E !important;
+    }
+    .hero-bg .btn-secondary {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(4px);
+      border-color: white;
+      color: white;
+    }
+    .hero-bg .btn-secondary:hover {
+      background: white;
+      color: #1E1E1E;
+    }
+
+    .emotional-bg {
+      background-image: url('https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1600&auto=format');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      isolation: isolate;
+    }
+    .emotional-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+    .emotional-bg .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-bg {
+      background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&auto=format');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      isolation: isolate;
+    }
+    .cta-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: -1;
+    }
+    .cta-bg .container {
+      position: relative;
+      z-index: 2;
+    }
+    .cta-bg .section-title,
+    .cta-bg p {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sticky Header -->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">FutnitureEnd<span>Fitting</span></div>
+    <div class="mobile-menu" id="mobileMenuBtn"><i class="fas fa-bars"></i></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- Hero Section (with background image) -->
+<section id="home" class="hero hero-bg">
+  <div class="container hero-content">
+    <h1>The silence of an empty room is an invitation.<br>Let’s give it a voice.</h1>
+    <p style="font-size:1.2rem; margin: 20px 0;">Premium Furniture & Interior Fittings — Bespoke, Installed, Loved.</p>
+    <ul class="hero-bullets">
+      <li><i class="fas fa-check-circle" style="color:#C87A3E;"></i> Bespoke furniture, made for you</li>
+      <li><i class="fas fa-check-circle" style="color:#C87A3E;"></i> Residential & Commercial</li>
+      <li><i class="fas fa-check-circle" style="color:#C87A3E;"></i> White-glove installation</li>
+      <li><i class="fas fa-check-circle" style="color:#C87A3E;"></i> Materials that last decades</li>
+    </ul>
+    <div class="hero-buttons">
+      <button class="btn-primary" id="openModalBtn">REQUEST YOUR FREE CONSULTATION</button>
+      <a href="#portfolio" class="btn-secondary">EXPLORE OUR WORLD</a>
+    </div>
+    <p style="margin-top: 24px;">⭐ 4.9 average | 500+ projects</p>
+  </div>
+</section>
+
+<!-- Interest Section -->
+<section>
+  <div class="container">
+    <div style="display: grid; gap: 40px; grid-template-columns: 1fr 1fr; align-items: center;">
+      <div>
+        <h2 class="section-title" style="text-align:left;">Have you ever walked into a room and felt… nothing?</h2>
+        <p style="margin: 20px 0;">Cold floors. Mismatched furniture. A layout that fights you. Most furniture is mass-produced for someone else's life. You deserve better.</p>
+        <p>We listen, measure, design, build, and install with the care of a craftsman. From custom wardrobes to full interior transformations, we handle every detail.</p>
+        <a href="#process" class="btn-outline" style="margin-top: 24px; display: inline-block;">→ SEE HOW WE WORK</a>
+      </div>
+      <div><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&auto=format" alt="elegant living room" style="width:100%; border-radius: 28px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM CAROUSEL (Third Section) -->
+<section style="background: #FDF9F5;">
+  <div class="container">
+    <h2 class="section-title">See What's Inspiring Us Right Now</h2>
+    <p class="section-sub">A glimpse into recent projects, workshop moments, and spaces we've transformed. Follow us <strong>@furniturendfitting</strong> for daily design stories.</p>
+    <div class="carousel-container">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- slides will be injected via js -->
+      </div>
+      <button class="carousel-btn prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+      <button class="carousel-btn next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div class="dots" id="carouselDots"></div>
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="https://www.instagram.com/furniturendfitting" target="_blank" class="btn-outline"><i class="fab fa-instagram"></i> Visit our Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="container">
+    <h2 class="section-title">More Than Furniture. A New Way of Living.</h2>
+    <div class="grid-3">
+      <div class="service-card"><i class="fas fa-cubes"></i><h3>Custom Furniture Manufacturing</h3><p>Built for your style, dimensions, and dreams.</p></div>
+      <div class="service-card"><i class="fas fa-drafting-compass"></i><h3>Interior Fittings</h3><p>Flawless skirting, paneling, built-ins.</p></div>
+      <div class="service-card"><i class="fas fa-home"></i><h3>Residential Furnishing</h3><p>Living, bedrooms, kitchens — transformed.</p></div>
+      <div class="service-card"><i class="fas fa-building"></i><h3>Commercial Furnishing</h3><p>Executive desks & collaborative zones.</p></div>
+      <div class="service-card"><i class="fas fa-chalkboard-user"></i><h3>Space Planning & Consultation</h3><p>Maximize every inch, elevate every corner.</p></div>
+    </div>
+    <div style="text-align:center; margin-top: 40px;"><button class="btn-primary" id="openModalBtn2">REQUEST A FREE QUOTE</button></div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Why Clients Stop Searching Once They Find Us</h2>
+    <p class="section-sub">Because buying furniture is emotional. And we treat it that way.</p>
+    <div class="grid-3">
+      <div class="benefit-card"><i class="fas fa-gem"></i><h3>Generational Craftsmanship</h3><p>Hand-finished joints, zero shortcuts.</p></div>
+      <div class="benefit-card"><i class="fas fa-tree"></i><h3>Materials With Memory</h3><p>Solid woods, natural stone, high-resilience foams.</p></div>
+      <div class="benefit-card"><i class="fas fa-ruler-combined"></i><h3>Yours, Not Anyone Else’s</h3><p>Custom-fit to your walls and soul.</p></div>
+      <div class="benefit-card"><i class="fas fa-broom"></i><h3>Installation That Respects Your Home</h3><p>Spotless, careful, professional.</p></div>
+      <div class="benefit-card"><i class="fas fa-calendar-check"></i><h3>On Time. Every Time.</h3><p>Delays are an excuse we don't accept.</p></div>
+      <div class="benefit-card"><i class="fas fa-heart"></i><h3>You First. Always.</h3><p>Transparent pricing, honest conversations.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Projects (Before/After Gallery) -->
+<section id="portfolio">
+  <div class="container">
+    <h2 class="section-title">Seeing Is Believing. Prepare to Gasp.</h2>
+    <p class="section-sub">A cramped living room → a light‑filled haven. An empty office shell → a CEO's command center.</p>
+    <div class="grid-3">
+      <div class="project-card"><h3>The “Clutter to Calm” Wardrobe</h3><div class="image-compare"><img src="https://i.pinimg.com/736x/13/c6/98/13c6980a89d74241cdd26c1019c1aebe.jpg?w=300&auto=format" alt="before"><img src="https://i.pinimg.com/736x/74/84/51/748451300581b62b4e55ace8425dd0d1.jpg?w=300&auto=format" alt="after"></div><p>Before → After</p></div>
+      <div class="project-card"><h3>Executive Retreat Office</h3><div class="image-compare"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&auto=format" alt="before"><img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=300&auto=format" alt="after"></div></div>
+      <div class="project-card"><h3>Family Kitchen Makeover</h3><div class="image-compare"><img src="https://i.pinimg.com/736x/cf/b8/68/cfb868d1a158aa4aa9a453e4f42a3b6c.jpg?w=300&auto=format" alt="before"><img src="https://i.pinimg.com/webp/1200x/e9/d8/5f/e9d85f253b8c947fb95ef1fed931d5fa.webp?w=300&auto=format" alt="after"></div></div>
+    </div>
+    <div style="text-align:center; margin-top: 32px;"><a href="#" class="btn-secondary">VIEW FULL PORTFOLIO →</a></div>
+  </div>
+</section>
+
+<!-- Emotional Pull (with background image) -->
+<section class="emotional-bg" style="background: #1E1E1E; color: white;">
+  <div class="container" style="text-align:center;">
+    <h2 style="font-size: 2.2rem;">Close your eyes. Walk into your dream space.</h2>
+    <p style="margin: 28px auto; max-width: 700px; font-size: 1.1rem;">The morning light hits a bookshelf that holds your favorite novels. Your hand runs along a dining table so smooth it feels like water. This isn’t a fantasy. It’s Tuesday next month.</p>
+    <button class="btn-primary" id="openModalBtn3" style="background:#C87A3E; border-color:#C87A3E;">REQUEST YOUR FREE CONSULTATION</button>
+  </div>
+</section>
+
+<!-- Process -->
+<section id="process">
+  <div class="container">
+    <h2 class="section-title">From "I Wish" to "Wow" in Five Steps</h2>
+    <div class="process-steps">
+      <div class="process-step"><div class="step-number">1</div><h3>Discovery Call</h3><p>15 min talk about style & budget</p></div>
+      <div class="process-step"><div class="step-number">2</div><h3>Home / Office Visit</h3><p>Measure and listen to unspoken wishes</p></div>
+      <div class="process-step"><div class="step-number">3</div><h3>Design & 3D Rendering</h3><p>See your furniture before we craft</p></div>
+      <div class="process-step"><div class="step-number">4</div><h3>Crafting & Quality Check</h3><p>Built, inspected, perfected</p></div>
+      <div class="process-step"><div class="step-number">5</div><h3>Installation & Final Walkthrough</h3><p>We place, you smile.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Materials -->
+<section>
+  <div class="container">
+    <div style="display:grid; gap: 40px; grid-template-columns: 1fr 1fr; align-items:center;">
+      <div><h2 class="section-title" style="text-align:left;">We Don't Cut Corners. We Cut Wood.</h2><ul style="list-style: none;"><li><i class="fas fa-leaf" style="color:#C87A3E;"></i> Solid hardwoods (oak, walnut, teak)</li><li><i class="fas fa-wind"></i> Eco-friendly, low-VOC finishes</li><li><i class="fas fa-door-closed"></i> Soft-close hinges, 100k openings</li><li><i class="fas fa-hand-sparkles"></i> Hand-finished edges</li></ul><button class="btn-outline" style="margin-top:24px;">ORDER SAMPLE KIT</button></div>
+      <div><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&auto=format" style="width:100%; border-radius:28px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Action Section / CTA (with background image) -->
+<section class="cta-bg">
+  <div class="container" style="text-align:center;">
+    <h2 class="section-title">Ready to Stop Compromising?</h2>
+    <p>Let’s talk about your space. You'll get: free quote within 24h, 3D design concept, dedicated project manager.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:32px;">
+      <button class="btn-primary" id="openModalBtn4">REQUEST YOUR FREE QUOTE</button>
+      <a href="https://wa.me/2348131572774" target="_blank" class="btn-secondary"><i class="fab fa-whatsapp"></i> CHAT WITH US ON WHATSAPP</a>
+      <a href="tel:+2348131572774" class="btn-outline">CALL & SPEAK TO A DESIGNER</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Accordion -->
+<section>
+  <div class="container">
+    <h2 class="section-title">FAQ – Answers You Actually Need</h2>
+    <div id="faqContainer">
+      <div class="faq-item"><button class="faq-question">How long does a custom piece take? <i class="fas fa-plus"></i></button><div class="faq-answer">Typically 4–6 weeks from design approval. Rush options available.</div></div>
+      <div class="faq-item"><button class="faq-question">What’s the price range? <i class="fas fa-plus"></i></button><div class="faq-answer">Custom wardrobe starts around $1,200; full living room sets $3,500–$8,000.</div></div>
+      <div class="faq-item"><button class="faq-question">Do you work with my interior designer? <i class="fas fa-plus"></i></button><div class="faq-answer">Absolutely. We love collaborations.</div></div>
+      <div class="faq-item"><button class="faq-question">What if I don't like the 3D design? <i class="fas fa-plus"></i></button><div class="faq-answer">Free revisions up to three times. We build only after your final approval.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials (Towards Ending) -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Don't Just Take Our Word for It. Take Theirs.</h2>
+    <div class="grid-3">
+      <div class="testimonial-card"><i class="fas fa-star" style="color:#F5B041;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p style="margin:16px 0;">“I cried when I saw my new living room. Finally a space that feels like me.”</p><h4>— Priya M.</h4><span>Homeowner, Mumbai</span></div>
+      <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>“Our office productivity went up 30%. The furniture is sturdy, beautiful, installation took only two days.”</p><h4>— James K.</h4><span>COO, FinTech</span></div>
+      <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>“Our boutique hotel guests keep asking where we bought the lobby furniture. Worth every penny.”</p><h4>— Elena & Marco</h4><span>Hotel Owners</span></div>
+    </div>
+    <div style="text-align:center; margin-top: 32px;"><a href="#" class="btn-outline">READ 50+ MORE REVIEWS →</a></div>
+  </div>
+</section>
+
+<!-- Sustainability -->
+<section>
+  <div class="container" style="text-align:center;">
+    <h2 class="section-title">Beautiful Furniture. Beautiful Conscience.</h2>
+    <div class="grid-3" style="margin-top: 20px;">
+      <div><i class="fas fa-recycle fa-2x" style="color:#C87A3E;"></i><p>Wood offcuts repurposed</p></div>
+      <div><i class="fas fa-water fa-2x"></i><p>Water-based finishes</p></div>
+      <div><i class="fas fa-tree fa-2x"></i><p>One tree planted per order >$2,000</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Instagram Feed Grid -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Follow us @furniturendfitting</h2>
+    <p class="section-sub">Daily design inspiration, behind‑the‑scenes, and live Q&As</p>
+    <div class="grid-3">
+      <a href="https://www.instagram.com/furniturendfitting" target="_blank"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=300&auto=format" style="width:100%; border-radius:24px;"></a>
+      <a href="https://www.instagram.com/furniturendfitting" target="_blank"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=300&auto=format" style="width:100%; border-radius:24px;"></a>
+      <a href="https://www.instagram.com/furniturendfitting" target="_blank"><img src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=300&auto=format" style="width:100%; border-radius:24px;"></a>
+      <a href="https://www.instagram.com/furniturendfitting" target="_blank"><img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=300&auto=format" style="width:100%; border-radius:24px;"></a>
+      <a href="https://www.instagram.com/furniturendfitting" target="_blank"><img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=300&auto=format" style="width:100%; border-radius:24px;"></a>
+      <a href="https://www.instagram.com/furniturendfitting" target="_blank"><img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=300&auto=format" style="width:100%; border-radius:24px;"></a>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section>
+  <div class="container" style="text-align:center; max-width: 600px;">
+    <h3>Become an Insider</h3>
+    <p>One email a month: design trends, early access, and a free Space Planning Checklist.</p>
+    <form id="newsletterForm" style="display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;"><input type="email" placeholder="Your email address" style="flex:1; padding:12px; border-radius:40px; border:1px solid #ddd;"><button type="submit" class="btn-primary">SEND ME INSPIRATION</button></form>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<div class="trust-bar">
+  <div class="trust-item"><i class="fas fa-trophy"></i><span>512+</span> projects completed</div>
+  <div class="trust-item"><i class="fas fa-clock"></i><span>98%</span> on-time delivery</div>
+  <div class="trust-item"><i class="fas fa-smile"></i><span>214</span> happy clients</div>
+  <div class="trust-item"><i class="fas fa-medal"></i><span>Lifetime</span> warranty</div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container footer-grid">
+    <div><h3>Futniture End Fitting</h3><p>Premium furniture & interior fittings that transform spaces into stories.</p></div>
+    <div><h4>Quick links</h4><ul style="list-style:none;"><li><a href="#home" style="color:#ccc;">Home</a></li><li><a href="#services" style="color:#ccc;">Services</a></li><li><a href="#portfolio" style="color:#ccc;">Portfolio</a></li></ul></div>
+    <div><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> +234 813 157 2774</p><p><i class="fab fa-instagram"></i> @furniturendfitting</p></div>
+    <div><h4>Follow</h4><div class="social-icons"><a href="https://www.instagram.com/furniturendfitting" target="_blank"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook"></i></a></div></div>
+  </div>
+  <hr><p style="text-align:center; font-size:0.8rem;">© 2025 NovaScape — Crafted with soul</p>
+</footer>
+
+<!-- Floating Buttons -->
+<a href="https://wa.me/2348131572774" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="floating-quote" id="floatQuoteBtn"><i class="fas fa-pencil-alt"></i> Free Quote</button>
+
+<!-- Modal Quote Form -->
+<div id="quoteModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3>Request a free quote</h3>
+    <form id="quoteForm" enctype="multipart/form-data">
+      <input type="text" placeholder="Full name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="tel" placeholder="Phone">
+      <textarea rows="3" placeholder="Tell us about your project"></textarea>
+      <input type="file" accept="image/*" placeholder="Upload room photo">
+      <button type="submit" class="btn-primary btn-block">Send Request</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Instagram Carousel (simulated from brand's IG aesthetic)
+  const carouselImages = [
+    "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&auto=format",
+    "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format",
+    "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&auto=format",
+    "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&auto=format",
+    "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&auto=format"
+  ];
+  const captions = ["Elegant walnut dining set", "Custom wardrobe reveal", "Minimalist office transformation", "Before & after: living room", "Handcrafted kitchen island"];
+
+  let currentIdx = 0;
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('carouselDots');
+
+  function buildCarousel() {
+    track.innerHTML = '';
+    carouselImages.forEach((src, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+      slide.innerHTML = `<img src="${src}" alt="Instagram @furniturendfitting"><div class="carousel-caption">${captions[i]} • @furniturendfitting</div>`;
+      track.appendChild(slide);
+    });
+    updateDots();
+    updateCarousel();
+  }
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentIdx * 100}%)`;
+    document.querySelectorAll('.dot').forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentIdx);
+    });
+  }
+  function updateDots() {
+    dotsContainer.innerHTML = '';
+    carouselImages.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === currentIdx) dot.classList.add('active');
+      dot.addEventListener('click', () => { currentIdx = i; updateCarousel(); });
+      dotsContainer.appendChild(dot);
+    });
+  }
+  document.getElementById('prevBtn')?.addEventListener('click', () => { currentIdx = (currentIdx - 1 + carouselImages.length) % carouselImages.length; updateCarousel(); });
+  document.getElementById('nextBtn')?.addEventListener('click', () => { currentIdx = (currentIdx + 1) % carouselImages.length; updateCarousel(); });
+  setInterval(() => { currentIdx = (currentIdx + 1) % carouselImages.length; updateCarousel(); }, 5000);
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('active');
+      const icon = btn.querySelector('i');
+      icon.classList.toggle('fa-plus');
+      icon.classList.toggle('fa-minus');
+    });
+  });
+
+  // Modal Logic
+  const modal = document.getElementById('quoteModal');
+  const openBtns = document.querySelectorAll('#openModalBtn, #openModalBtn2, #openModalBtn3, #openModalBtn4, #floatQuoteBtn');
+  const closeSpan = document.querySelector('.close-modal');
+  openBtns.forEach(btn => btn.addEventListener('click', () => modal.style.display = 'flex'));
+  closeSpan.addEventListener('click', () => modal.style.display = 'none');
+  window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+
+  document.getElementById('quoteForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert("Thank you! We'll get back to you within 24 hours. 📐✨");
+    modal.style.display = 'none';
+  });
+
+  document.getElementById('newsletterForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert("You're now an insider! Check your inbox for the checklist.");
+  });
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  const nav = document.getElementById('navLinks');
+  menuBtn?.addEventListener('click', () => nav.classList.toggle('active'));
+
+  buildCarousel();
+</script>
+</body>
+</html>

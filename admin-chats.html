@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Chat | Kreation Digitals</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #003333;
+      --secondary: #39FF14;
+      --accent: #00CC99;
+      --dark: #000000;
+      --light: #FFFFFF;
+      --gray: #AAAAAA;
+      --danger: #ff3b30;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Login Modal */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    
+    .login-box {
+      background: var(--dark);
+      padding: 2.5rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .login-box h2 {
+      color: var(--light);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    
+    .login-box input {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      border-radius: 10px;
+      color: var(--light);
+      font-size: 1rem;
+    }
+    
+    .login-box button {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      border: none;
+      border-radius: 10px;
+      color: var(--dark);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .login-error {
+      color: var(--danger);
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    /* Dashboard */
+    #dashboard {
+      display: none;
+      height: 100vh;
+    }
+    
+    .admin-layout {
+      display: flex;
+      height: 100vh;
+    }
+    
+    .sidebar {
+      width: 320px;
+      background: rgba(0, 0, 0, 0.95);
+      border-right: 1px solid rgba(57, 255, 20, 0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+    }
+    
+    .admin-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--light);
+      margin-bottom: 1.5rem;
+    }
+    
+    .admin-logo i { color: var(--secondary); }
+    .admin-logo span { color: var(--secondary); }
+    
+    .admin-stats {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(57, 255, 20, 0.1);
+      padding: 0.8rem;
+      border-radius: 8px;
+    }
+    
+    .stat-item { text-align: center; }
+    .stat-value { font-size: 1.2rem; font-weight: 700; color: var(--secondary); }
+    .stat-label { font-size: 0.7rem; color: var(--gray); }
+    
+    .chats-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    
+    .chat-item {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    
+    .chat-item:hover { border-color: rgba(57, 255, 20, 0.3); }
+    .chat-item.active { border-color: var(--secondary); background: rgba(57, 255, 20, 0.1); }
+    .chat-item.unread { border-left: 4px solid var(--secondary); }
+    
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .chat-name { font-weight: 600; color: var(--light); }
+    .chat-time { font-size: 0.7rem; color: var(--gray); }
+    .chat-subject { font-size: 0.8rem; color: var(--gray); }
+    .chat-preview { font-size: 0.8rem; color: var(--gray); }
+    
+    .unread-badge {
+      background: var(--secondary);
+      color: var(--dark);
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+    
+    .chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #0a0a0a;
+    }
+    
+    .chat-header-area {
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .client-info h2 { color: var(--light); font-size: 1.2rem; }
+    .client-info p { color: var(--gray); font-size: 0.8rem; }
+    
+    .messages-area {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .message {
+      max-width: 70%;
+      padding: 1rem;
+      border-radius: 15px;
+    }
+    
+    .message.client {
+      align-self: flex-start;
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+    }
+    
+    .message.admin {
+      align-self: flex-end;
+      background: rgba(0, 51, 51, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+    }
+    
+    .input-area {
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(57, 255, 20, 0.2);
+    }
+    
+    .message-form {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .message-input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      border-radius: 10px;
+      color: var(--light);
+      resize: none;
+    }
+    
+    .send-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      border: none;
+      color: var(--dark);
+      cursor: pointer;
+    }
+    
+    .welcome-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .error-message {
+      background: rgba(255, 59, 48, 0.1);
+      border: 1px solid rgba(255, 59, 48, 0.3);
+      color: var(--danger);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Modal -->
+  <div id="loginModal" class="login-modal">
+    <div class="login-box">
+      <h2>Admin Login</h2>
+      <input type="email" id="loginEmail" placeholder="admin@kreationdigitals.com" value="admin@kreationdigitals.com">
+      <input type="password" id="loginPassword" placeholder="Password" value="123456">
+      <button onclick="window.adminLogin()">Login to Dashboard</button>
+      <div id="loginError" class="login-error"></div>
+      <div id="firestoreError" style="margin-top: 1rem; font-size: 0.8rem; color: #ff9500; display: none;"></div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard">
+    <div class="admin-layout">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="admin-logo"><i class="fas fa-shield-alt"></i> Admin <span>Dashboard</span></div>
+          <div class="admin-stats">
+            <div class="stat-item"><div class="stat-value" id="totalChats">0</div><div class="stat-label">Total</div></div>
+            <div class="stat-item"><div class="stat-value" id="unreadChats">0</div><div class="stat-label">Unread</div></div>
+            <div class="stat-item"><div class="stat-value" id="todayChats">0</div><div class="stat-label">Today</div></div>
+          </div>
+        </div>
+        <div style="padding: 0 1rem 0.5rem;">
+          <input type="text" id="searchChats" placeholder="🔍 Search chats..." style="width:100%; padding:0.8rem; background:rgba(0,0,0,0.3); border:1px solid rgba(57,255,20,0.2); border-radius:8px; color:var(--light);">
+        </div>
+        <div class="chats-list" id="chatsList">
+          <div style="text-align:center; padding:2rem; color:var(--gray);">Login to see chats</div>
+        </div>
+      </aside>
+
+      <main class="chat-area">
+        <div id="welcomeScreen" class="welcome-screen">
+          <h2>Welcome, Admin!</h2>
+          <p>Select a chat from the sidebar</p>
+          <button onclick="window.logout()" style="margin-top:2rem; padding:0.8rem 2rem; background:rgba(255,59,48,0.1); border:1px solid rgba(255,59,48,0.2); color:var(--danger); border-radius:8px;">Logout</button>
+        </div>
+        <div id="activeChat" style="display:none; height:100%;">
+          <div class="chat-header-area">
+            <div class="client-info">
+              <h2 id="clientName">Client Name</h2>
+              <p id="clientEmail">client@email.com</p>
+              <p id="chatSubject" style="font-size:0.8rem; color:var(--secondary);">Subject: </p>
+            </div>
+            <button onclick="window.logout()" style="background:rgba(255,59,48,0.1); border:1px solid rgba(255,59,48,0.2); color:var(--danger); padding:0.5rem 1rem; border-radius:6px;">Logout</button>
+          </div>
+          <div class="messages-area" id="messagesArea"></div>
+          <div class="input-area">
+            <form id="adminMessageForm">
+              <div class="message-form">
+                <textarea class="message-input" id="adminMessageInput" placeholder="Type your reply..." rows="1"></textarea>
+                <button type="submit" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+  <script>
+    // === FIREBASE CONFIGURATION ===
+    const firebaseConfig = {
+      apiKey: "AIzaSyDLrhVKnl60WcRYkpFEvDvy3-u5_WX-rCo",
+      authDomain: "reviews-d3d7a.firebaseapp.com",
+      projectId: "reviews-d3d7a",
+      storageBucket: "reviews-d3d7a.firebasestorage.app",
+      messagingSenderId: "743750078637",
+      appId: "1:743750078637:web:1ce08d557c5c6080967624"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+
+    console.log("🔥 Admin Firebase initialized");
+
+    // === GLOBAL STATE ===
+    let currentAdmin = null;
+    let currentChatId = null;
+    let allChats = [];
+    let currentMessages = [];
+    let chatListener = null;
+    let messageListener = null;
+
+    // === DOM HELPERS ===
+    const getElement = (id) => document.getElementById(id);
+
+    // === TEST FIRESTORE CONNECTION ===
+    async function testFirestoreAccess() {
+      try {
+        const testRef = await db.collection('permission-test').add({
+          test: true,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        await testRef.delete();
+        console.log("✅ Firestore write access confirmed!");
+        return true;
+      } catch (error) {
+        console.error("❌ Firestore permission error:", error.code, error.message);
+        const errorDiv = getElement('firestoreError');
+        if (errorDiv) {
+          errorDiv.style.display = 'block';
+          errorDiv.innerHTML = `
+            <strong>⚠️ Firestore Permission Error</strong><br>
+            ${error.message}<br><br>
+            <strong>Solution:</strong> Go to Firebase Console → Firestore Database → Rules → Set:
+            <code style="display:block; background:#000; padding:0.5rem; margin-top:0.5rem; border-radius:4px;">
+            rules_version = '2';<br>
+            service cloud.firestore {<br>
+            &nbsp;&nbsp;match /databases/{database}/documents {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;match /{document=**} { allow read, write: if true; }<br>
+            &nbsp;&nbsp;}<br>
+            }
+            </code>
+          `;
+        }
+        return false;
+      }
+    }
+
+    // === ADMIN LOGIN ===
+    window.adminLogin = async function() {
+      const email = getElement('loginEmail').value.trim();
+      const password = getElement('loginPassword').value.trim();
+      const errorEl = getElement('loginError');
+      
+      if (!email || !password) {
+        errorEl.textContent = 'Please enter email and password';
+        return;
+      }
+      
+      try {
+        console.log("Attempting login with:", email);
+        await auth.signInWithEmailAndPassword(email, password);
+        console.log("✅ Login successful!");
+        getElement('loginModal').style.display = 'none';
+        getElement('dashboard').style.display = 'block';
+        
+        // Test Firestore after login
+        await testFirestoreAccess();
+        initializeAdmin();
+        
+      } catch (error) {
+        console.error("❌ Login failed:", error);
+        
+        if (error.code === 'auth/user-not-found') {
+          errorEl.textContent = 'User not found. Create this user in Firebase Console → Authentication → Add User';
+        } else if (error.code === 'auth/wrong-password') {
+          errorEl.textContent = 'Wrong password. Try: 123456 or reset in Firebase Console';
+        } else if (error.code === 'auth/invalid-email') {
+          errorEl.textContent = 'Invalid email format';
+        } else {
+          errorEl.textContent = 'Login failed: ' + (error.message || JSON.stringify(error));
+        }
+      }
+    };
+
+    // === LOGOUT ===
+    window.logout = function() {
+      auth.signOut().then(() => window.location.reload());
+    };
+
+    // === AUTH STATE ===
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("✅ Admin authenticated:", user.email);
+        currentAdmin = user;
+        getElement('loginModal').style.display = 'none';
+        getElement('dashboard').style.display = 'block';
+        testFirestoreAccess();
+        initializeAdmin();
+      } else {
+        console.log("👤 No admin logged in");
+        getElement('loginModal').style.display = 'flex';
+        getElement('dashboard').style.display = 'none';
+      }
+    });
+
+    // === INITIALIZE ADMIN DASHBOARD ===
+    function initializeAdmin() {
+      loadAllChats();
+      setupRealtimeChats();
+      setupSearch();
+      
+      // Auto-focus message input
+      const messageInput = getElement('adminMessageInput');
+      if (messageInput) {
+        messageInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendAdminReply(e);
+          }
+        });
+      }
+      
+      // Message form
+      const form = getElement('adminMessageForm');
+      if (form) form.addEventListener('submit', sendAdminReply);
+    }
+
+    // === LOAD ALL CHATS ===
+    async function loadAllChats() {
+      try {
+        console.log("📨 Loading all chats...");
+        
+        const snapshot = await db.collection('chats')
+          .orderBy('lastMessageTime', 'desc')
+          .get();
+
+        allChats = [];
+        const chatsList = getElement('chatsList');
+        chatsList.innerHTML = '';
+
+        if (snapshot.empty) {
+          chatsList.innerHTML = `<div style="text-align:center; color:var(--gray); padding:2rem;"><i class="fas fa-comments" style="font-size:2rem; opacity:0.3;"></i><p>No chats yet</p><p style="font-size:0.9rem; margin-top:0.5rem;">Create a chat from the client page first</p></div>`;
+          return;
+        }
+
+        console.log(`✅ Found ${snapshot.size} chats`);
+        
+        snapshot.forEach(doc => {
+          const chat = { id: doc.id, ...doc.data() };
+          allChats.push(chat);
+          renderChatItem(chat);
+        });
+
+        updateStats();
+        
+      } catch (error) {
+        console.error("❌ Error loading chats:", error);
+        
+        if (error.code === 'permission-denied') {
+          getElement('chatsList').innerHTML = `
+            <div style="text-align:center; padding:2rem; color:#ff9500; border:1px solid rgba(255,149,0,0.3); border-radius:8px;">
+              <i class="fas fa-shield-alt" style="font-size:2rem; margin-bottom:1rem;"></i>
+              <h3 style="margin-bottom:0.5rem;">Firestore Permission Error</h3>
+              <p style="font-size:0.9rem; margin-bottom:1rem;">Your Firebase rules are blocking access to 'chats' collection.</p>
+              <p style="font-size:0.8rem; background:#000; padding:0.5rem; border-radius:4px;">
+                Go to Firebase Console → Firestore Database → Rules → Paste this:<br>
+                <code style="color:#39FF14;">allow read, write: if true;</code>
+              </p>
+            </div>
+          `;
+        }
+      }
+    }
+
+    // === RENDER CHAT ITEM ===
+    function renderChatItem(chat) {
+      const item = document.createElement('div');
+      item.className = `chat-item ${chat.unreadCount > 0 ? 'unread' : ''}`;
+      item.id = `chat-${chat.id}`;
+
+      const lastMessageTime = chat.lastMessageTime?.toDate() || new Date();
+      const timeString = formatTime(lastMessageTime);
+
+      item.innerHTML = `
+        <div class="chat-header">
+          <span class="chat-name">${chat.clientName || 'Client'}</span>
+          <span class="chat-time">${timeString}</span>
+          ${chat.unreadCount > 0 ? `<span class="unread-badge">${chat.unreadCount}</span>` : ''}
+        </div>
+        <div class="chat-subject">📌 ${chat.subject || 'General Inquiry'}</div>
+        <div class="chat-preview">💬 ${chat.lastMessage || 'No messages'}</div>
+      `;
+      
+      item.onclick = () => openAdminChat(chat.id);
+      getElement('chatsList').appendChild(item);
+    }
+
+    // === OPEN CHAT ===
+    async function openAdminChat(chatId) {
+      currentChatId = chatId;
+      const chat = allChats.find(c => c.id === chatId);
+      if (!chat) return;
+
+      getElement('clientName').textContent = chat.clientName || 'Client';
+      getElement('clientEmail').textContent = chat.clientEmail || 'No email';
+      getElement('chatSubject').textContent = `Subject: ${chat.subject || 'General Inquiry'}`;
+
+      getElement('welcomeScreen').style.display = 'none';
+      getElement('activeChat').style.display = 'flex';
+
+      document.querySelectorAll('.chat-item').forEach(item => item.classList.remove('active'));
+      document.getElementById(`chat-${chatId}`)?.classList.add('active');
+
+      await loadAdminMessages(chatId);
+      markChatAsRead(chatId);
+      setupAdminMessageListener(chatId);
+      
+      setTimeout(() => getElement('adminMessageInput').focus(), 100);
+    }
+
+    // === LOAD MESSAGES ===
+    async function loadAdminMessages(chatId) {
+      try {
+        const snapshot = await db.collection('chats').doc(chatId)
+          .collection('messages').orderBy('timestamp', 'asc').get();
+
+        const messagesArea = getElement('messagesArea');
+        messagesArea.innerHTML = '';
+        currentMessages = [];
+
+        if (snapshot.empty) {
+          messagesArea.innerHTML = '<div style="text-align:center; color:var(--gray); padding:2rem;">No messages yet. Send your first reply!</div>';
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          const msg = { id: doc.id, ...doc.data() };
+          currentMessages.push(msg);
+          renderAdminMessage(msg);
+        });
+
+        setTimeout(() => messagesArea.scrollTop = messagesArea.scrollHeight, 100);
+        
+      } catch (error) {
+        console.error("❌ Error loading messages:", error);
+      }
+    }
+
+    // === RENDER MESSAGE ===
+    function renderAdminMessage(message) {
+      const messagesArea = getElement('messagesArea');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${message.sender === 'client' ? 'client' : 'admin'}`;
+      
+      const timestamp = message.timestamp?.toDate() || new Date();
+      const timeString = timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      messageDiv.innerHTML = `
+        <div class="message-content">${message.content}</div>
+        <div class="message-meta">
+          <span class="message-sender">${message.sender === 'client' ? message.senderEmail : 'You (Admin)'}</span>
+          <span class="message-time">${timeString}</span>
+        </div>
+      `;
+      messagesArea.appendChild(messageDiv);
+    }
+
+    // === SEND REPLY ===
+    async function sendAdminReply(event) {
+      if (event) event.preventDefault();
+      const input = getElement('adminMessageInput');
+      const content = input.value.trim();
+      if (!content || !currentChatId || !currentAdmin) return;
+
+      try {
+        const sendBtn = document.querySelector('.send-btn');
+        sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        sendBtn.disabled = true;
+
+        await db.collection('chats').doc(currentChatId)
+          .collection('messages').add({
+            sender: 'admin',
+            senderEmail: currentAdmin.email,
+            content: content,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            read: false,
+            messageType: 'text'
+          });
+
+        await db.collection('chats').doc(currentChatId).update({
+          lastMessage: content,
+          lastMessageTime: firebase.firestore.FieldValue.serverTimestamp(),
+          unreadCount: firebase.firestore.FieldValue.increment(1),
+          status: 'replied',
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        input.value = '';
+        input.style.height = 'auto';
+        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+        sendBtn.disabled = false;
+
+      } catch (error) {
+        console.error("❌ Error sending reply:", error);
+        alert('Failed to send: ' + error.message);
+        const sendBtn = document.querySelector('.send-btn');
+        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+        sendBtn.disabled = false;
+      }
+    }
+
+    // === MARK AS READ ===
+    async function markChatAsRead(chatId) {
+      try {
+        await db.collection('chats').doc(chatId).update({ unreadCount: 0 });
+      } catch (error) {
+        console.error("Error marking as read:", error);
+      }
+    }
+
+    // === REALTIME UPDATES ===
+    function setupRealtimeChats() {
+      if (chatListener) chatListener();
+      
+      chatListener = db.collection('chats')
+        .orderBy('lastMessageTime', 'desc')
+        .onSnapshot(snapshot => {
+          snapshot.docChanges().forEach(change => {
+            if (change.type === 'added' || change.type === 'modified') {
+              loadAllChats();
+            }
+          });
+        }, error => {
+          console.error("❌ Realtime error:", error);
+        });
+    }
+
+    function setupAdminMessageListener(chatId) {
+      if (messageListener) messageListener();
+      
+      messageListener = db.collection('chats').doc(chatId)
+        .collection('messages').orderBy('timestamp', 'asc')
+        .onSnapshot(snapshot => {
+          snapshot.docChanges().forEach(change => {
+            if (change.type === 'added') {
+              const message = { id: change.doc.id, ...change.doc.data() };
+              const exists = currentMessages.some(m => m.id === change.doc.id);
+              if (!exists) {
+                currentMessages.push(message);
+                renderAdminMessage(message);
+                setTimeout(() => getElement('messagesArea').scrollTop = getElement('messagesArea').scrollHeight, 100);
+              }
+            }
+          });
+        });
+    }
+
+    // === SEARCH ===
+    function setupSearch() {
+      const searchInput = getElement('searchChats');
+      if (!searchInput) return;
+      
+      searchInput.addEventListener('input', e => {
+        const term = e.target.value.toLowerCase();
+        const filtered = allChats.filter(c => 
+          c.clientName?.toLowerCase().includes(term) ||
+          c.clientEmail?.toLowerCase().includes(term) ||
+          c.subject?.toLowerCase().includes(term) ||
+          c.lastMessage?.toLowerCase().includes(term)
+        );
+        
+        const chatsList = getElement('chatsList');
+        chatsList.innerHTML = '';
+        
+        if (filtered.length === 0) {
+          chatsList.innerHTML = '<div style="text-align:center; color:var(--gray); padding:2rem;">No chats found</div>';
+        } else {
+          filtered.forEach(chat => renderChatItem(chat));
+        }
+      });
+    }
+
+    // === UTILS ===
+    function updateStats() {
+      const total = allChats.length;
+      const unread = allChats.filter(c => c.unreadCount > 0).length;
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      const todayChats = allChats.filter(c => (c.lastMessageTime?.toDate() || new Date()) >= today).length;
+
+      getElement('totalChats').textContent = total;
+      getElement('unreadChats').textContent = unread;
+      getElement('todayChats').textContent = todayChats;
+    }
+
+    function formatTime(date) {
+      const now = new Date();
+      const diff = now - date;
+      if (diff < 60*60*1000) return Math.floor(diff/(60*1000)) + 'm ago';
+      else if (diff < 24*60*60*1000) return Math.floor(diff/(60*60*1000)) + 'h ago';
+      else return date.toLocaleDateString();
+    }
+
+    // === AUTO-RESIZE TEXTAREA ===
+    document.addEventListener('DOMContentLoaded', () => {
+      const textarea = getElement('adminMessageInput');
+      if (textarea) {
+        textarea.addEventListener('input', function() {
+          this.style.height = 'auto';
+          this.style.height = (this.scrollHeight) + 'px';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

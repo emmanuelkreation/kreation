@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Kreation Digital Hub: Professional graphic design portfolio featuring logos, flyers, and branding projects." />
+  <meta name="keywords" content="graphic design, logo design, flyer design, branding, portfolio, kreation digital" />
+  <meta name="author" content="Kreation Digital Hub" />
+  <title>Graphic Design Portfolio | Kreation Digital Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <!-- Lightbox CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================
+       COMPLETE CSS FROM YOUR HOMEPAGE
+       ============================================= */
+    
+    :root {
+      --primary: #003333;
+      --secondary: #39FF14;
+      --accent: #00CC99;
+      --dark: #000000;
+      --light: #FFFFFF;
+      --gray: #AAAAAA;
+      --gradient-start: #001a1a;
+      --gradient-end: #004d4d;
+      --neon-glow: 0 0 10px rgba(57, 255, 20, 0.7),
+                   0 0 20px rgba(57, 255, 20, 0.5),
+                   0 0 30px rgba(57, 255, 20, 0.3);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+      font-family: 'Inter', 'Montserrat', sans-serif;
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--gradient-start) 0%, var(--dark) 50%, var(--gradient-end) 100%);
+      opacity: 0.9;
+      z-index: -3;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: rgba(0, 0, 0, 0.95);
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+      transition: all 0.3s ease;
+      width: 100%;
+      left: 0;
+      right: 0;
+    }
+
+    header.scrolled {
+      padding: 0.8rem 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--light);
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      z-index: 1002;
+    }
+
+    .logo span {
+      color: var(--secondary);
+      position: relative;
+    }
+
+    .logo span::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--secondary);
+      box-shadow: var(--neon-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+      padding: 0.5rem 0;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.5px;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--secondary);
+      text-shadow: var(--neon-glow);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--secondary);
+      transition: width 0.3s;
+      box-shadow: var(--neon-glow);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 8rem 2rem 5rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .hero-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-text {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: 3.8rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--light);
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .hero-text h1 span {
+      color: var(--secondary);
+      display: block;
+      text-shadow: var(--neon-glow);
+      position: relative;
+    }
+
+    .hero-text p {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: var(--light);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.4s;
+      border: 2px solid var(--secondary);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: var(--neon-glow);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: var(--secondary);
+      transition: all 0.4s;
+      z-index: -1;
+    }
+
+    .btn:hover {
+      color: var(--dark);
+      transform: translateY(-5px);
+    }
+
+    .btn:hover::before {
+      width: 100%;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--secondary);
+    }
+
+    .btn-secondary:hover {
+      color: var(--dark);
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-image-container {
+      width: 380px;
+      height: 380px;
+      position: relative;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--secondary);
+      box-shadow: var(--neon-glow);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .hero-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tech-element {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border: 2px solid rgba(57, 255, 20, 0.5);
+      border-radius: 10px;
+      box-shadow: var(--neon-glow);
+      animation: rotate 20s linear infinite;
+      z-index: -1;
+    }
+
+    .tech-element-1 {
+      top: 20%;
+      left: 10%;
+      width: 120px;
+      height: 120px;
+      animation-duration: 25s;
+    }
+
+    .tech-element-2 {
+      bottom: 30%;
+      right: 15%;
+      width: 80px;
+      height: 80px;
+      animation-duration: 15s;
+      animation-direction: reverse;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Trusted By Section */
+    .trusted-by {
+      padding: 3rem 0;
+      background: rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    .trusted-by p {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .client-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .client-logo {
+      color: var(--gray);
+      font-weight: 600;
+      font-size: 1.2rem;
+      opacity: 0.7;
+      transition: all 0.3s;
+    }
+
+    .client-logo:hover {
+      opacity: 1;
+      color: var(--secondary);
+    }
+
+    /* Sections */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      padding: 8rem 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.8rem;
+      color: var(--light);
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .section-title h2 span {
+      color: var(--secondary);
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--secondary);
+      box-shadow: var(--neon-glow);
+    }
+
+    .section-title p {
+      max-width: 700px;
+      margin: 2rem auto 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    /* Card Styles */
+    .card {
+      background: rgba(0, 51, 51, 0.3);
+      border-radius: 15px;
+      padding: 2.5rem;
+      transition: all 0.4s;
+      height: 100%;
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(57, 255, 20, 0.4);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* Grid Layouts */
+    .grid {
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.95);
+      padding: 5rem 0 2rem;
+      border-top: 1px solid rgba(57, 255, 20, 0.2);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-col h4 {
+      color: var(--light);
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+      position: relative;
+      padding-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--secondary);
+      box-shadow: var(--neon-glow);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 1.1rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--light);
+      transition: all 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .social-links a:hover {
+      background: var(--secondary);
+      color: var(--dark);
+      transform: translateY(-5px);
+      box-shadow: var(--neon-glow);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(57, 255, 20, 0.2);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+    }
+
+    /* Scroll to top button */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--secondary);
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 1000;
+      box-shadow: var(--neon-glow);
+      border: none;
+    }
+
+    #scrollTopBtn.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #scrollTopBtn:hover {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    /* Chat Widget */
+    .chat-widget {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+    }
+
+    .chat-button {
+      background: var(--secondary);
+      color: var(--dark);
+      border: none;
+      border-radius: 50px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: var(--neon-glow);
+      transition: all 0.3s;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .chat-button:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.98);
+        flex-direction: column;
+        padding: 5rem 2rem 2rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        margin: 0;
+      }
+      
+      .nav-links.active {
+        right: 0;
+      }
+      
+      .nav-links a {
+        font-size: 1.2rem;
+        padding: 1rem 0;
+        display: block;
+        border-bottom: 1px solid rgba(57, 255, 20, 0.1);
+      }
+      
+      /* Close button for mobile menu */
+      .nav-links::before {
+        content: '\f00d';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        font-size: 1.5rem;
+        color: var(--light);
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      /* Ensure main content doesn't shift when menu opens */
+      body.menu-open {
+        overflow: hidden;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-text p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+      
+      .chat-button span {
+        display: none;
+      }
+      
+      .chat-button {
+        padding: 1rem;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+      }
+
+      /* Fix container padding on mobile */
+      .container {
+        padding: 0 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      header {
+        padding: 1rem;
+      }
+      
+      header.scrolled {
+        padding: 0.8rem 1rem;
+      }
+
+      .nav-links {
+        width: 100%;
+        gap: 0.8rem;
+      }
+
+      .hero {
+        padding: 6rem 1rem 3rem;
+      }
+
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .footer-col h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .social-links {
+        justify-content: center;
+      }
+      
+      .client-logos {
+        gap: 1.5rem;
+      }
+      
+      .chat-widget {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .chat-button {
+        padding: 0.8rem;
+        width: 55px;
+        height: 55px;
+      }
+      
+      #scrollTopBtn {
+        bottom: 90px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+
+      /* Ensure no horizontal scrolling */
+      .container {
+        padding: 0 1rem;
+        max-width: 100%;
+        overflow: hidden;
+      }
+    }
+
+    /* =============================================
+       PORTFOLIO PAGE SPECIFIC STYLES
+       ============================================= */
+    
+    /* Portfolio Hero Section */
+    .portfolio-hero {
+      padding: 8rem 2rem 4rem;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(0, 51, 51, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
+    }
+    
+    .portfolio-hero-content {
+      max-width: 800px;
+      z-index: 2;
+      position: relative;
+    }
+    
+    .portfolio-hero h1 {
+      font-size: 3.8rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--light);
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .portfolio-hero h1 span {
+      color: var(--secondary);
+      display: inline-block;
+      text-shadow: var(--neon-glow);
+      position: relative;
+    }
+    
+    .portfolio-hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+    
+    /* Portfolio Grid - HD Optimized */
+    .portfolio-grid-section {
+      padding: 5rem 2rem;
+      background: var(--dark);
+      position: relative;
+    }
+    
+    .portfolio-filter {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+    
+    .portfolio-filter-btn {
+      background: transparent;
+      color: var(--light);
+      border: 1px solid var(--gray);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+    
+    .portfolio-filter-btn.active,
+    .portfolio-filter-btn:hover {
+      background: var(--secondary);
+      color: var(--dark);
+      border-color: var(--secondary);
+      box-shadow: var(--neon-glow);
+      transform: translateY(-2px);
+    }
+    
+    /* HD Portfolio Grid */
+    .hd-portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    @media (min-width: 1600px) {
+      .hd-portfolio-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    
+    /* HD Portfolio Item */
+    .hd-portfolio-item {
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 1/1;
+      background: rgba(0, 51, 51, 0.2);
+      border: 1px solid rgba(57, 255, 20, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    
+    .hd-portfolio-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--secondary);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        var(--neon-glow);
+    }
+    
+    .hd-portfolio-img-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* HD Image Loading System */
+    .hd-portfolio-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(45deg, #001a1a, #003333);
+    }
+    
+    .hd-portfolio-item:hover .hd-portfolio-img {
+      transform: scale(1.08);
+    }
+    
+    /* Lazy loading placeholder */
+    .hd-portfolio-img.loading {
+      filter: blur(10px);
+      transform: scale(1.1);
+    }
+    
+    .hd-portfolio-img.loaded {
+      filter: blur(0);
+      transition: filter 0.3s ease-out;
+    }
+    
+    /* Portfolio Overlay */
+    .hd-portfolio-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.7) 70%,
+        rgba(0, 0, 0, 0.95) 100%
+      );
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      transform: translateY(20px);
+    }
+    
+    .hd-portfolio-item:hover .hd-portfolio-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .hd-portfolio-info {
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+    }
+    
+    .hd-portfolio-item:hover .hd-portfolio-info {
+      transform: translateY(0);
+    }
+    
+    .hd-portfolio-title {
+      color: var(--light);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hd-portfolio-category {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+      border: 1px solid var(--secondary);
+    }
+    
+    .hd-portfolio-description {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* View Button */
+    .hd-view-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+    }
+    
+    .hd-portfolio-item:hover .hd-view-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .hd-view-btn:hover {
+      color: var(--light);
+      gap: 0.8rem;
+    }
+    
+    .hd-view-btn i {
+      transition: transform 0.3s;
+    }
+    
+    .hd-view-btn:hover i {
+      transform: translateX(5px);
+    }
+    
+    /* Lightbox Customization */
+    .lightbox .lb-image {
+      border: 5px solid var(--secondary);
+      border-radius: 10px;
+      box-shadow: 
+        0 0 50px rgba(57, 255, 20, 0.5),
+        0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+    
+    .lightbox .lb-outerContainer {
+      background: rgba(0, 0, 0, 0.95);
+      border-radius: 15px;
+      border: 1px solid rgba(57, 255, 20, 0.3);
+    }
+    
+    .lightbox .lb-data .lb-caption {
+      font-size: 1.2rem;
+      color: var(--light);
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    
+    .lightbox .lb-data .lb-number {
+      color: var(--secondary);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+    }
+    
+    .lightbox .lb-nav a.lb-prev,
+    .lightbox .lb-nav a.lb-next {
+      opacity: 0.8;
+      transition: all 0.3s;
+    }
+    
+    .lightbox .lb-nav a.lb-prev:hover,
+    .lightbox .lb-nav a.lb-next:hover {
+      opacity: 1;
+      filter: drop-shadow(0 0 10px var(--secondary));
+    }
+    
+    /* Portfolio Stats */
+    .portfolio-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin: 5rem auto;
+      max-width: 800px;
+      padding: 2rem;
+      background: rgba(0, 51, 51, 0.2);
+      border-radius: 15px;
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    
+    .portfolio-stat-item {
+      text-align: center;
+      padding: 1rem 2rem;
+    }
+    
+    .portfolio-stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      text-shadow: var(--neon-glow);
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .portfolio-stat-label {
+      color: var(--light);
+      font-size: 1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* CTA Section */
+    .portfolio-cta {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--gradient-start) 0%, var(--dark) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .portfolio-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+      animation: glow-line 3s ease-in-out infinite;
+    }
+    
+    @keyframes glow-line {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    
+    .portfolio-cta h2 {
+      font-size: 2.8rem;
+      color: var(--light);
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .portfolio-cta h2 span {
+      color: var(--secondary);
+      text-shadow: var(--neon-glow);
+    }
+    
+    .portfolio-cta p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    
+    /* Loading Animation */
+    .portfolio-loader {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: var(--secondary);
+    }
+    
+    .portfolio-loader.active {
+      display: block;
+    }
+    
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(57, 255, 20, 0.2);
+      border-top-color: var(--secondary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Responsive Design for Portfolio */
+    @media (max-width: 1200px) {
+      .hd-portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+      
+      .portfolio-hero h1 {
+        font-size: 3.2rem;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .hd-portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+      
+      .portfolio-hero {
+        padding: 6rem 2rem 3rem;
+        min-height: 50vh;
+      }
+      
+      .portfolio-hero h1 {
+        font-size: 2.8rem;
+      }
+      
+      .portfolio-hero p {
+        font-size: 1.1rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hd-portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+      
+      .portfolio-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .portfolio-filter {
+        gap: 0.5rem;
+        margin-bottom: 3rem;
+      }
+      
+      .portfolio-filter-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+      }
+      
+      .portfolio-stats {
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+      
+      .portfolio-stat-item {
+        padding: 1rem;
+      }
+      
+      .portfolio-stat-number {
+        font-size: 2rem;
+      }
+      
+      .portfolio-cta h2 {
+        font-size: 2.2rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hd-portfolio-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      
+      .portfolio-hero {
+        padding: 5rem 1rem 2rem;
+      }
+      
+      .portfolio-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .portfolio-stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .portfolio-cta {
+        padding: 4rem 1rem;
+      }
+      
+      .portfolio-cta h2 {
+        font-size: 1.8rem;
+      }
+      
+      .hd-portfolio-overlay {
+        padding: 1.5rem;
+      }
+      
+      .hd-portfolio-title {
+        font-size: 1.2rem;
+      }
+    }
+    
+    /* Animation for portfolio items */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .hd-portfolio-item.animate {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div class="gradient-bg"></div>
+  
+  <!-- Header -->
+  <header>
+    <div class="logo">Kreation <span>Digital</span>Hub</div>
+    <button class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services">Services</a></li>
+        <li><a href="pricing">Pricing</a></li>
+        <li><a href="portfolio" class="active">Portfolio</a></li>
+        <li><a href="team">Agency</a></li>
+        <li><a href="testimonials">Testimonials</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="https://kreationdigitals.blogspot.com/">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Portfolio Hero Section -->
+  <section class="portfolio-hero">
+    <div class="portfolio-hero-content" data-aos="fade-up">
+      <h1>Graphic Design <span>Portfolio</span></h1>
+      <p>Discover our collection of professionally crafted logos and marketing flyers. Each design tells a unique brand story, combining creativity with strategic thinking to deliver visual solutions that make an impact.</p>
+      <div class="btn-group">
+        <a href="#portfolio-grid" class="btn" data-aos="fade-up" data-aos-delay="200">View Designs</a>
+        <a href="#contact" class="btn btn-secondary" data-aos="fade-up" data-aos-delay="400">Start Your Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid Section -->
+  <section id="portfolio-grid" class="portfolio-grid-section">
+    <div class="container">
+      <div class="portfolio-filter" data-aos="fade-up">
+        <button class="portfolio-filter-btn active" data-filter="all">All Works</button>
+        <button class="portfolio-filter-btn" data-filter="logo">Logo Design</button>
+        <button class="portfolio-filter-btn" data-filter="flyer">Marketing Flyers</button>
+        <button class="portfolio-filter-btn" data-filter="branding">Brand Identity</button>
+      </div>
+      
+      <div class="portfolio-loader" id="portfolioLoader">
+        <div class="loader-spinner"></div>
+        <p>Loading HD Portfolio...</p>
+      </div>
+      
+      <div class="hd-portfolio-grid" id="portfolioGrid">
+        <!-- Portfolio items will be loaded here -->
+        <!-- 12 items: 6 logos, 6 flyers -->
+      </div>
+      
+      <div class="portfolio-stats" data-aos="fade-up" data-aos-delay="400">
+        <div class="portfolio-stat-item">
+          <div class="portfolio-stat-number">50+</div>
+          <div class="portfolio-stat-label">Logo Designs</div>
+        </div>
+        <div class="portfolio-stat-item">
+          <div class="portfolio-stat-number">100+</div>
+          <div class="portfolio-stat-label">Flyers Created</div>
+        </div>
+        <div class="portfolio-stat-item">
+          <div class="portfolio-stat-number">40+</div>
+          <div class="portfolio-stat-label">Happy Clients</div>
+        </div>
+        <div class="portfolio-stat-item">
+          <div class="portfolio-stat-number">100%</div>
+          <div class="portfolio-stat-label">Satisfaction Rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="portfolio-cta">
+    <div class="container" data-aos="fade-up">
+      <h2>Ready to Bring Your <span>Vision to Life?</span></h2>
+      <p>Your brand deserves a visual identity that stands out. Let's collaborate to create stunning designs that capture your essence and connect with your audience.</p>
+      <div class="btn-group">
+        <a href="contact.html" class="btn">Start Your Design Project</a>
+        <a href="#book-call" class="btn btn-secondary">Book Free Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Kreation Digital Hub</h4>
+          <p>Creating digital experiences that combine stunning design with compelling content to help businesses thrive online.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="team.">About</a>
+            <a href="services">Services</a>
+            <a href="portfolio">Portfolio</a>
+            <a href="testimonials">Testimonials</a>
+            <a href="contact">Contact</a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Services</h4>
+          <div class="footer-links">
+            <a href="services">Graphic Design</a>
+            <a href="services">Logo Design</a>
+            <a href="services">Flyer Design</a>
+            <a href="services">Brand Identity</a>
+            <a href="services">Website Design</a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 Kreation Digital Hub. All rights reserved.</p>
+        <a href="https://kreationdigitals.com">Designed by Kreation Digital Agency</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTopBtn">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="chat-widget">
+    <button class="chat-button">
+      <i class="fas fa-comment"></i>
+      <span>Need help? Chat with us</span>
+    </button>
+  </div>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <!-- Lightbox JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+  
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100
+    });
+
+    // Portfolio Data - Replace with your actual image URLs and descriptions
+    const portfolioItems = [
+      {
+        id: 1,
+        category: 'logo',
+        title: 'EcoBloom Sustainable',
+        description: 'Modern logo for an eco-friendly beauty brand focusing on sustainability and natural ingredients.',
+        image: 'gallery/logo4.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 2,
+        category: 'flyer',
+        title: 'Summer Music Festival',
+        description: 'Vibrant event flyer for a summer music festival with bold typography and energetic colors.',
+        image: 'gallery/logo3.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 3,
+        category: 'logo',
+        title: 'TechVortex Solutions',
+        description: 'Futuristic logo for a tech startup specializing in AI and data analytics solutions.',
+        image: 'gallery/logo2.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 4,
+        category: 'flyer',
+        title: 'Real Estate Launch',
+        description: 'Professional flyer for a luxury real estate development launch event.',
+        image: 'gallery/logo1.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 5,
+        category: 'logo',
+        title: 'UrbanBite Café',
+        description: 'Minimalist logo for a modern urban café chain with geometric coffee bean inspiration.',
+        image: 'gallery/cho.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1567446537710-0e9b8d4d8c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 6,
+        category: 'flyer',
+        title: 'Fitness Challenge',
+        description: 'Motivational flyer for a 30-day fitness challenge with dynamic imagery and clear CTAs.',
+        image: 'gallery/feast.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 7,
+        category: 'logo',
+        title: 'Nexus Architects',
+        description: 'Elegant logo for an architecture firm combining geometric precision with creative flow.',
+        image: 'gallery/chr.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 8,
+        category: 'flyer',
+        title: 'Black Friday Sale',
+        description: 'Retail flyer for Black Friday promotions with attention-grabbing discounts and offers.',
+        image: 'gallery/all.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1576671419303-0a03b4b8d6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 9,
+        category: 'logo',
+        title: 'Zenith Wellness',
+        description: 'Serene logo for a wellness center focusing on mindfulness and holistic health.',
+        image: 'gallery/bir.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1567446537711-0e9b8d4d8c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 10,
+        category: 'flyer',
+        title: 'Food Festival 2024',
+        description: 'Colorful flyer for an international food festival showcasing diverse cuisines.',
+        image: 'gallery/ads.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 11,
+        category: 'logo',
+        title: 'Velocity Sports',
+        description: 'Dynamic logo for a sports apparel brand emphasizing speed and performance.',
+        image: 'gallery/tolu.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1567446537712-0e9b8d4d8c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+       {
+        id: 12,
+        category: 'logo',
+        title: 'Velocity Sports',
+        description: 'Dynamic logo for a sports apparel brand emphasizing speed and performance.',
+        image: 'gallery/Brandforge gig image.png',
+        thumbnail: 'https://images.unsplash.com/photo-1567446537712-0e9b8d4d8c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+       {
+        id: 13,
+        category: 'logo',
+        title: 'Velocity Sports',
+        description: 'Dynamic logo for a sports apparel brand emphasizing speed and performance.',
+        image: 'gallery/BrandForge.png',
+        thumbnail: 'https://images.unsplash.com/photo-1567446537712-0e9b8d4d8c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+       {
+        id: 14,
+        category: 'logo',
+        title: 'Velocity Sports',
+        description: 'Dynamic logo for a sports apparel brand emphasizing speed and performance.',
+        image: 'gallery/Elegant jewelry promotional flyer.png',
+        thumbnail: 'https://images.unsplash.com/photo-1567446537712-0e9b8d4d8c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 15,
+        category: 'flyer',
+        title: 'Business Conference',
+        description: 'Professional conference flyer with sleek design and essential event information.',
+        image: 'gallery/ram.jpg',
+        thumbnail: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      }
+    ];
+
+    // Function to load portfolio items
+    function loadPortfolioItems(items) {
+      const grid = document.getElementById('portfolioGrid');
+      grid.innerHTML = '';
+      
+      items.forEach((item, index) => {
+        const portfolioItem = document.createElement('div');
+        portfolioItem.className = `hd-portfolio-item animate ${item.category}`;
+        portfolioItem.setAttribute('data-category', item.category);
+        portfolioItem.style.animationDelay = `${index * 0.1}s`;
+        
+        portfolioItem.innerHTML = `
+          <div class="hd-portfolio-img-container">
+            <img 
+              src="${item.thumbnail || item.image}" 
+              data-src="${item.image}" 
+              alt="${item.title}" 
+              class="hd-portfolio-img loading"
+              loading="lazy"
+            >
+            <div class="hd-portfolio-overlay">
+              <div class="hd-portfolio-info">
+                <span class="hd-portfolio-category">${item.category === 'logo' ? 'Logo Design' : 'Marketing Flyer'}</span>
+                <h3 class="hd-portfolio-title">${item.title}</h3>
+                <p class="hd-portfolio-description">${item.description}</p>
+                <a href="${item.image}" 
+                   data-lightbox="portfolio" 
+                   data-title="${item.title} - ${item.description}"
+                   class="hd-view-btn">
+                  View Full Design <i class="fas fa-expand"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        grid.appendChild(portfolioItem);
+        
+        // Lazy load image
+        const img = portfolioItem.querySelector('.hd-portfolio-img');
+        if (img.dataset.src) {
+          const imageLoader = new Image();
+          imageLoader.src = img.dataset.src;
+          imageLoader.onload = () => {
+            img.src = img.dataset.src;
+            img.classList.remove('loading');
+            img.classList.add('loaded');
+          };
+        }
+      });
+    }
+
+    // Initialize portfolio
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load all portfolio items
+      loadPortfolioItems(portfolioItems);
+      
+      // Filter functionality
+      const filterButtons = document.querySelectorAll('.portfolio-filter-btn');
+      const portfolioItemsAll = document.querySelectorAll('.hd-portfolio-item');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          const filter = button.getAttribute('data-filter');
+          
+          // Filter items
+          portfolioItemsAll.forEach(item => {
+            if (filter === 'all' || item.getAttribute('data-category') === filter) {
+              item.style.display = 'block';
+              setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+              }, 10);
+            } else {
+              item.style.opacity = '0';
+              item.style.transform = 'translateY(20px)';
+              setTimeout(() => {
+                item.style.display = 'none';
+              }, 300);
+            }
+          });
+        });
+      });
+      
+      // Lightbox configuration
+      lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+        'showImageNumberLabel': true,
+        'alwaysShowNavOnTouchDevices': true,
+        'fitImagesInViewport': true,
+        'maxWidth': 1200,
+        'maxHeight': 800
+      });
+      
+      // Initialize functions
+      initHeaderFunctions();
+      initScrollToTop();
+      initMobileMenu();
+    });
+
+    // Header scroll function
+    function initHeaderFunctions() {
+      const header = document.querySelector('header');
+      if (header) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        });
+      }
+    }
+
+    // Scroll to top function
+    function initScrollToTop() {
+      const scrollBtn = document.getElementById("scrollTopBtn");
+      if (scrollBtn) {
+        window.onscroll = () => {
+          if (document.documentElement.scrollTop > 300) {
+            scrollBtn.classList.add("show");
+          } else {
+            scrollBtn.classList.remove("show");
+          }
+        };
+
+        scrollBtn.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+    }
+
+    // Mobile menu function
+    function initMobileMenu() {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+      const body = document.body;
+      
+      if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          body.classList.toggle('menu-open');
+          
+          const icon = mobileMenuBtn.querySelector('i');
+          if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          });
+        });
+      }
+    }
+
+    // Particles.js configuration
+    particlesJS('particles-js', {
+      "particles": {
+        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#39FF14" },
+        "shape": { "type": "polygon", "stroke": { "width": 0, "color": "#000000" } },
+        "opacity": { "value": 0.3, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+        "size": { "value": 3, "random": true, "anim": { "enable": true, "speed": 3, "size_min": 0.1, "sync": false } },
+        "line_linked": { "enable": true, "distance": 150, "color": "#39FF14", "opacity": 0.4, "width": 1 },
+        "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": true, "mode": "grab" },
+          "onclick": { "enable": true, "mode": "push" },
+          "resize": true
+        },
+        "modes": {
+          "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+          "push": { "particles_nb": 4 }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+</html>

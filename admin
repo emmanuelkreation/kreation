@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unified Admin | Kreation Digital Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #003333;
+      --secondary: #39FF14;
+      --accent: #00CC99;
+      --dark: #000000;
+      --light: #FFFFFF;
+      --gray: #AAAAAA;
+      --danger: #ff3b30;
+      --warning: #ff9500;
+      --success: #4CAF50;
+      --info: #5ac8fa;
+      --card-bg: rgba(0, 51, 51, 0.3);
+      --neon-glow: 0 0 10px rgba(57, 255, 20, 0.7),
+                   0 0 20px rgba(57, 255, 20, 0.5),
+                   0 0 30px rgba(57, 255, 20, 0.3);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      opacity: 0.3;
+    }
+
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #001a1a 0%, #000000 50%, #004d4d 100%);
+      z-index: -3;
+    }
+
+    /* Login Modal */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .login-box {
+      background: var(--card-bg);
+      padding: 3rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 450px;
+      border: 1px solid var(--secondary);
+      box-shadow: var(--neon-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+    }
+
+    .login-box h2 {
+      color: var(--light);
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .login-box h2 span {
+      color: var(--secondary);
+      text-shadow: 0 0 10px var(--secondary);
+    }
+
+    .login-box p {
+      color: var(--gray);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      border-radius: 10px;
+      color: var(--light);
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .login-input:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      border: none;
+      border-radius: 10px;
+      color: var(--dark);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(57, 255, 20, 0.4);
+    }
+
+    .login-error {
+      color: var(--danger);
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* Dashboard Layout */
+    #dashboard {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    .admin-layout {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 380px;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(57, 255, 20, 0.2);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .sidebar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--secondary), var(--accent));
+    }
+
+    .sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+    }
+
+    .admin-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--light);
+      margin-bottom: 1.5rem;
+    }
+
+    .admin-logo i {
+      color: var(--secondary);
+      font-size: 2rem;
+    }
+
+    .admin-logo span {
+      color: var(--secondary);
+      text-shadow: 0 0 10px var(--secondary);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: rgba(57, 255, 20, 0.05);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      border-radius: 10px;
+      padding: 0.8rem;
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .stat-card:hover {
+      border-color: var(--secondary);
+      box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+    }
+
+    .stat-icon {
+      color: var(--secondary);
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--secondary);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.6rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Tab Navigation */
+    .tab-nav {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.8rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      color: var(--gray);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .tab-btn i {
+      font-size: 1rem;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--secondary);
+      color: var(--light);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: var(--dark);
+      border-color: transparent;
+      font-weight: 600;
+    }
+
+    /* Filter Tabs (Secondary) */
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .filter-btn {
+      flex: 1;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      color: var(--gray);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.8rem;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--secondary);
+      color: var(--light);
+    }
+
+    .filter-btn.active {
+      background: rgba(57, 255, 20, 0.2);
+      color: var(--secondary);
+      border-color: var(--secondary);
+    }
+
+    /* Search Bar */
+    .search-box {
+      padding: 0 1.5rem 1rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      border-radius: 8px;
+      color: var(--light);
+      font-size: 0.95rem;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+
+    /* Items List */
+    .items-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 1.5rem 1.5rem;
+    }
+
+    .item-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.1);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .item-card:hover {
+      border-color: var(--secondary);
+      transform: translateX(5px);
+      background: rgba(57, 255, 20, 0.05);
+    }
+
+    .item-card.active {
+      border-color: var(--secondary);
+      background: rgba(57, 255, 20, 0.1);
+      box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+    }
+
+    .item-card.pending {
+      border-left: 4px solid var(--warning);
+    }
+
+    .item-card.unread {
+      border-left: 4px solid var(--info);
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
+    .item-title {
+      font-weight: 600;
+      color: var(--light);
+      font-size: 1rem;
+    }
+
+    .item-badge {
+      background: var(--warning);
+      color: var(--dark);
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+    }
+
+    .item-badge.approved {
+      background: var(--success);
+    }
+
+    .item-badge.unread {
+      background: var(--info);
+      color: var(--dark);
+    }
+
+    .item-rating {
+      color: gold;
+      margin-bottom: 0.3rem;
+      font-size: 0.8rem;
+    }
+
+    .item-preview {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 0.5rem;
+    }
+
+    .item-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      color: var(--gray);
+    }
+
+    .item-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+    }
+
+    .service-tag {
+      background: rgba(57, 255, 20, 0.1);
+      color: var(--secondary);
+      padding: 0.2rem 0.4rem;
+      border-radius: 10px;
+      font-size: 0.6rem;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .main-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+    }
+
+    .content-header {
+      padding: 1.5rem 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-info h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .header-info p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .header-badge {
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      color: var(--secondary);
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+    }
+
+    .logout-btn {
+      background: rgba(255, 59, 48, 0.1);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: var(--danger);
+      color: white;
+    }
+
+    .content-body {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    /* Welcome Screen */
+    .welcome-screen {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .welcome-icon {
+      font-size: 5rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 0.5; transform: scale(1); }
+    }
+
+    .welcome-screen h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .welcome-screen h2 span {
+      color: var(--secondary);
+      text-shadow: 0 0 10px var(--secondary);
+    }
+
+    .welcome-screen p {
+      color: var(--gray);
+      font-size: 1.1rem;
+      max-width: 500px;
+    }
+
+    /* Review Detail */
+    .review-detail, .chat-detail {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .detail-name {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .detail-email {
+      color: var(--secondary);
+      font-size: 0.95rem;
+    }
+
+    .detail-rating {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      border-radius: 30px;
+      padding: 0.5rem 1.5rem;
+      color: gold;
+      font-size: 1.2rem;
+    }
+
+    .detail-message {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      line-height: 1.6;
+      border-left: 4px solid var(--secondary);
+    }
+
+    .detail-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .detail-service {
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      color: var(--secondary);
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+    }
+
+    .detail-meta {
+      display: flex;
+      gap: 2rem;
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin: 1rem 0;
+    }
+
+    /* Chat Messages */
+    .messages-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 0;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 1rem;
+      border-radius: 15px;
+      position: relative;
+    }
+
+    .message.client {
+      align-self: flex-start;
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      border-bottom-left-radius: 5px;
+    }
+
+    .message.admin {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: var(--dark);
+      border-bottom-right-radius: 5px;
+    }
+
+    .message-content {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 0.3rem;
+    }
+
+    .message-meta {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      opacity: 0.7;
+    }
+
+    .message.client .message-meta {
+      color: var(--gray);
+    }
+
+    .message.admin .message-meta {
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Input Area */
+    .input-area {
+      padding: 1.5rem 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(57, 255, 20, 0.2);
+      margin-top: 1rem;
+    }
+
+    .message-form {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+
+    .message-input {
+      flex: 1;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      border-radius: 10px;
+      color: var(--light);
+      resize: none;
+      min-height: 50px;
+      max-height: 150px;
+      font-size: 0.95rem;
+    }
+
+    .message-input:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+
+    .send-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      border: none;
+      color: var(--dark);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .send-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: var(--dark);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(57, 255, 20, 0.4);
+    }
+
+    .btn-danger {
+      background: rgba(255, 59, 48, 0.1);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-warning {
+      background: rgba(255, 149, 0, 0.1);
+      border: 1px solid var(--warning);
+      color: var(--warning);
+    }
+
+    .btn-warning:hover {
+      background: var(--warning);
+      color: white;
+    }
+
+    .btn-success {
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+
+    .btn-success:hover {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-info {
+      background: rgba(90, 200, 250, 0.1);
+      border: 1px solid var(--info);
+      color: var(--info);
+    }
+
+    .btn-info:hover {
+      background: var(--info);
+      color: white;
+    }
+
+    /* Loading */
+    .loading-spinner {
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(57, 255, 20, 0.3);
+      border-top-color: var(--secondary);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--secondary);
+      border-radius: 3px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .admin-layout {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        height: 40vh;
+      }
+      
+      .main-content {
+        height: 60vh;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .message {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div class="gradient-bg"></div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="login-modal">
+    <div class="login-box">
+      <h2><span>Kreation</span> Admin</h2>
+      <p>Enter your credentials to access the dashboard</p>
+      <input type="email" id="loginEmail" class="login-input" placeholder="admin@kreationdigitals.com" value="admin@kreationdigitals.com">
+      <input type="password" id="loginPassword" class="login-input" placeholder="Password" value="123456">
+      <button class="login-btn" onclick="handleLogin()">
+        <i class="fas fa-lock-open"></i> Access Dashboard
+      </button>
+      <div id="loginError" class="login-error"></div>
+    </div>
+  </div>
+
+  <!-- Main Dashboard -->
+  <div id="dashboard">
+    <div class="admin-layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="admin-logo">
+            <i class="fas fa-robot"></i> Kreation <span>Hub</span>
+          </div>
+          
+          <!-- Stats Overview -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-star"></i></div>
+              <div class="stat-value" id="totalReviews">0</div>
+              <div class="stat-label">Reviews</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-clock"></i></div>
+              <div class="stat-value" id="pendingReviews">0</div>
+              <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-comments"></i></div>
+              <div class="stat-value" id="totalChats">0</div>
+              <div class="stat-label">Chats</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-envelope"></i></div>
+              <div class="stat-value" id="unreadChats">0</div>
+              <div class="stat-label">Unread</div>
+            </div>
+          </div>
+
+          <!-- Main Tabs -->
+          <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('reviews')" id="tabReviews">
+              <i class="fas fa-star"></i> Reviews
+            </button>
+            <button class="tab-btn" onclick="switchTab('chats')" id="tabChats">
+              <i class="fas fa-comments"></i> Chats
+            </button>
+          </div>
+
+          <!-- Filter Tabs (Dynamic) -->
+          <div id="reviewsFilter" class="filter-tabs">
+            <button class="filter-btn active" onclick="filterReviews('all')">All</button>
+            <button class="filter-btn" onclick="filterReviews('pending')">Pending</button>
+            <button class="filter-btn" onclick="filterReviews('approved')">Approved</button>
+          </div>
+
+          <div id="chatsFilter" class="filter-tabs" style="display: none;">
+            <button class="filter-btn active" onclick="filterChats('all')">All</button>
+            <button class="filter-btn" onclick="filterChats('unread')">Unread</button>
+            <button class="filter-btn" onclick="filterChats('replied')">Replied</button>
+          </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-box">
+          <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search...">
+        </div>
+
+        <!-- Items List -->
+        <div class="items-list" id="itemsList">
+          <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <div class="content-header">
+          <div class="header-info" id="headerInfo">
+            <h2>Welcome, Admin</h2>
+            <p>Select an item from the sidebar to manage</p>
+          </div>
+          <div class="header-badge" id="headerBadge" style="display: none;"></div>
+          <button class="logout-btn" onclick="handleLogout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+
+        <div class="content-body" id="contentBody">
+          <!-- Welcome Screen -->
+          <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-icon">
+              <i class="fas fa-crown"></i>
+            </div>
+            <h2>Welcome <span>Admin</span></h2>
+            <p>Manage reviews and chat with clients from one unified dashboard</p>
+          </div>
+
+          <!-- Dynamic Content -->
+          <div id="dynamicContent" style="display: none;"></div>
+        </div>
+
+        <!-- Chat Input Area (hidden by default) -->
+        <div id="chatInputArea" class="input-area" style="display: none;">
+          <form id="adminMessageForm" class="message-form">
+            <textarea id="adminMessageInput" class="message-input" placeholder="Type your reply... (Press Enter to send, Shift+Enter for new line)" rows="1"></textarea>
+            <button type="submit" class="send-btn" id="sendMessageBtn">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <script>
+    // ========== FIREBASE CONFIG ==========
+    const firebaseConfig = {
+      apiKey: "AIzaSyDLrhVKnl60WcRYkpFEvDvy3-u5_WX-rCo",
+      authDomain: "reviews-d3d7a.firebaseapp.com",
+      projectId: "reviews-d3d7a",
+      storageBucket: "reviews-d3d7a.firebasestorage.app",
+      messagingSenderId: "743750078637",
+      appId: "1:743750078637:web:1ce08d557c5c6080967624"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+
+    // ========== GLOBAL STATE ==========
+    let currentAdmin = null;
+    let currentTab = 'reviews';
+    let currentFilter = 'all';
+    let allReviews = [];
+    let allChats = [];
+    let currentReviewId = null;
+    let currentChatId = null;
+    let currentMessages = [];
+    let messageListener = null;
+    let searchTerm = '';
+
+    // ========== INITIALIZE ==========
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 50 },
+        color: { value: "#39FF14" },
+        shape: { type: "polygon" },
+        opacity: { value: 0.2 },
+        size: { value: 3 },
+        line_linked: { enable: true, distance: 150, color: "#39FF14", opacity: 0.2 }
+      }
+    });
+
+    // ========== AUTHENTICATION ==========
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("✅ Admin logged in:", user.email);
+        currentAdmin = user;
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        loadAllData();
+      } else {
+        console.log("👤 No admin logged in");
+        document.getElementById('loginModal').style.display = 'flex';
+        document.getElementById('dashboard').style.display = 'none';
+      }
+    });
+
+    window.handleLogin = async function() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const errorEl = document.getElementById('loginError');
+      
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+      } catch (error) {
+        errorEl.textContent = 'Login failed: ' + error.message;
+      }
+    };
+
+    window.handleLogout = function() {
+      auth.signOut();
+    };
+
+    // ========== LOAD ALL DATA ==========
+    async function loadAllData() {
+      await Promise.all([loadReviews(), loadChats()]);
+      renderSidebarList();
+    }
+
+    // ========== LOAD REVIEWS ==========
+    async function loadReviews() {
+      try {
+        const snapshot = await db.collection('reviews')
+          .orderBy('timestamp', 'desc')
+          .get();
+        
+        allReviews = [];
+        snapshot.forEach(doc => {
+          allReviews.push({ id: doc.id, ...doc.data() });
+        });
+        
+        updateStats();
+        
+      } catch (error) {
+        console.error("Error loading reviews:", error);
+      }
+    }
+
+    // ========== LOAD CHATS ==========
+    async function loadChats() {
+      try {
+        const snapshot = await db.collection('chats')
+          .orderBy('lastMessageTime', 'desc')
+          .get();
+        
+        allChats = [];
+        snapshot.forEach(doc => {
+          allChats.push({ id: doc.id, ...doc.data() });
+        });
+        
+        updateStats();
+        
+      } catch (error) {
+        console.error("Error loading chats:", error);
+      }
+    }
+
+    // ========== UPDATE STATS ==========
+    function updateStats() {
+      const pendingReviews = allReviews.filter(r => !r.approved).length;
+      const unreadChats = allChats.filter(c => c.unreadCount > 0).length;
+      
+      document.getElementById('totalReviews').textContent = allReviews.length;
+      document.getElementById('pendingReviews').textContent = pendingReviews;
+      document.getElementById('totalChats').textContent = allChats.length;
+      document.getElementById('unreadChats').textContent = unreadChats;
+    }
+
+    // ========== SWITCH TAB ==========
+    window.switchTab = function(tab) {
+      currentTab = tab;
+      currentFilter = 'all';
+      
+      // Update tab buttons
+      document.getElementById('tabReviews').classList.remove('active');
+      document.getElementById('tabChats').classList.remove('active');
+      document.getElementById(`tab${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add('active');
+      
+      // Update filter tabs visibility
+      document.getElementById('reviewsFilter').style.display = tab === 'reviews' ? 'flex' : 'none';
+      document.getElementById('chatsFilter').style.display = tab === 'chats' ? 'flex' : 'none';
+      
+      // Reset filter buttons
+      document.querySelectorAll('#reviewsFilter .filter-btn, #chatsFilter .filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`#${tab}Filter .filter-btn:first-child`).classList.add('active');
+      
+      // Clear selection
+      currentReviewId = null;
+      currentChatId = null;
+      document.getElementById('dynamicContent').style.display = 'none';
+      document.getElementById('welcomeScreen').style.display = 'flex';
+      document.getElementById('chatInputArea').style.display = 'none';
+      
+      renderSidebarList();
+    };
+
+    // ========== FILTER REVIEWS ==========
+    window.filterReviews = function(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('#reviewsFilter .filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(filter)) {
+          btn.classList.add('active');
+        }
+      });
+      renderSidebarList();
+    };
+
+    // ========== FILTER CHATS ==========
+    window.filterChats = function(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('#chatsFilter .filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(filter)) {
+          btn.classList.add('active');
+        }
+      });
+      renderSidebarList();
+    };
+
+    // ========== RENDER SIDEBAR LIST ==========
+    function renderSidebarList() {
+      const listEl = document.getElementById('itemsList');
+      
+      if (currentTab === 'reviews') {
+        renderReviewsList(listEl);
+      } else {
+        renderChatsList(listEl);
+      }
+    }
+
+    function renderReviewsList(listEl) {
+      let filtered = [...allReviews];
+      
+      // Apply filter
+      if (currentFilter === 'pending') {
+        filtered = filtered.filter(r => !r.approved);
+      } else if (currentFilter === 'approved') {
+        filtered = filtered.filter(r => r.approved);
+      }
+      
+      // Apply search
+      if (searchTerm) {
+        filtered = filtered.filter(r => 
+          r.name?.toLowerCase().includes(searchTerm) ||
+          r.message?.toLowerCase().includes(searchTerm) ||
+          r.email?.toLowerCase().includes(searchTerm)
+        );
+      }
+      
+      if (filtered.length === 0) {
+        listEl.innerHTML = `
+          <div style="text-align: center; color: var(--gray); padding: 2rem;">
+            <i class="fas fa-inbox" style="font-size: 3rem; opacity: 0.3;"></i>
+            <p>No reviews found</p>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map(review => {
+        const isPending = !review.approved;
+        const stars = '★'.repeat(review.rating || 0) + '☆'.repeat(5 - (review.rating || 0));
+        const date = review.timestamp?.toDate ? 
+          new Date(review.timestamp.toDate()).toLocaleDateString() : 
+          review.date || 'Recently';
+        
+        return `
+          <div class="item-card ${isPending ? 'pending' : ''} ${currentReviewId === review.id ? 'active' : ''}" 
+               onclick="selectReview('${review.id}')">
+            <div class="item-header">
+              <span class="item-title">${review.name || 'Anonymous'}</span>
+              ${isPending ? '<span class="item-badge">Pending</span>' : '<span class="item-badge approved">Approved</span>'}
+            </div>
+            <div class="item-rating">${stars}</div>
+            <div class="item-preview">${review.message?.substring(0, 80)}${review.message?.length > 80 ? '...' : ''}</div>
+            <div class="item-meta">
+              <span><i class="far fa-calendar"></i> ${date}</span>
+              <span><i class="fas fa-star"></i> ${review.rating || 0}/5</span>
+            </div>
+            ${review.services?.length ? `
+              <div class="item-services">
+                ${review.services.slice(0, 3).map(s => `<span class="service-tag">${s}</span>`).join('')}
+                ${review.services.length > 3 ? '<span class="service-tag">+'+ (review.services.length - 3) +'</span>' : ''}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderChatsList(listEl) {
+      let filtered = [...allChats];
+      
+      // Apply filter
+      if (currentFilter === 'unread') {
+        filtered = filtered.filter(c => c.unreadCount > 0);
+      } else if (currentFilter === 'replied') {
+        filtered = filtered.filter(c => c.status === 'replied');
+      }
+      
+      // Apply search
+      if (searchTerm) {
+        filtered = filtered.filter(c => 
+          c.clientName?.toLowerCase().includes(searchTerm) ||
+          c.clientEmail?.toLowerCase().includes(searchTerm) ||
+          c.subject?.toLowerCase().includes(searchTerm)
+        );
+      }
+      
+      if (filtered.length === 0) {
+        listEl.innerHTML = `
+          <div style="text-align: center; color: var(--gray); padding: 2rem;">
+            <i class="fas fa-inbox" style="font-size: 3rem; opacity: 0.3;"></i>
+            <p>No chats found</p>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map(chat => {
+        const isUnread = chat.unreadCount > 0;
+        const lastMessageTime = chat.lastMessageTime?.toDate() || new Date();
+        const timeString = formatTime(lastMessageTime);
+        
+        return `
+          <div class="item-card ${isUnread ? 'unread' : ''} ${currentChatId === chat.id ? 'active' : ''}" 
+               onclick="selectChat('${chat.id}')">
+            <div class="item-header">
+              <span class="item-title">${chat.clientName || 'Client'}</span>
+              ${isUnread ? `<span class="item-badge unread">${chat.unreadCount}</span>` : ''}
+            </div>
+            <div class="item-preview" style="color: var(--secondary);">📌 ${chat.subject || 'General Inquiry'}</div>
+            <div class="item-preview">💬 ${chat.lastMessage?.substring(0, 60) || 'No messages yet'}</div>
+            <div class="item-meta">
+              <span><i class="far fa-clock"></i> ${timeString}</span>
+              <span><i class="fas fa-comment"></i> ${chat.unreadCount || 0} unread</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ========== SELECT REVIEW ==========
+    window.selectReview = async function(reviewId) {
+      currentReviewId = reviewId;
+      currentChatId = null;
+      document.getElementById('chatInputArea').style.display = 'none';
+      
+      const review = allReviews.find(r => r.id === reviewId);
+      if (!review) return;
+
+      renderSidebarList();
+      
+      const headerInfo = document.getElementById('headerInfo');
+      const stars = '★'.repeat(review.rating || 0) + '☆'.repeat(5 - (review.rating || 0));
+      
+      headerInfo.innerHTML = `
+        <h2>Review by ${review.name || 'Anonymous'}</h2>
+        <p>${review.email || 'No email'} • Submitted: ${review.date || 'Recently'}</p>
+      `;
+
+      document.getElementById('headerBadge').style.display = 'inline-block';
+      document.getElementById('headerBadge').innerHTML = `<i class="fas fa-star"></i> ${stars}`;
+
+      const services = review.services || [];
+
+      document.getElementById('dynamicContent').style.display = 'block';
+      document.getElementById('welcomeScreen').style.display = 'none';
+      document.getElementById('dynamicContent').innerHTML = `
+        <div class="review-detail">
+          <div class="detail-message">${review.message}</div>
+          
+          ${services.length > 0 ? `
+            <div class="detail-services">
+              ${services.map(s => `<span class="detail-service">${s}</span>`).join('')}
+            </div>
+          ` : ''}
+          
+          <div class="detail-meta">
+            <span><i class="far fa-calendar-alt"></i> Submitted: ${review.date || 'Recently'}</span>
+            <span><i class="fas fa-star"></i> Rating: ${review.rating}/5</span>
+          </div>
+          
+          <div class="action-buttons">
+            ${!review.approved ? 
+              `<button class="btn btn-primary" onclick="approveReview('${review.id}')">
+                <i class="fas fa-check"></i> Approve Review
+              </button>` : 
+              `<button class="btn btn-warning" onclick="unapproveReview('${review.id}')">
+                <i class="fas fa-undo"></i> Unapprove
+              </button>`
+            }
+            <button class="btn btn-danger" onclick="deleteReview('${review.id}')">
+              <i class="fas fa-trash"></i> Delete Review
+            </button>
+          </div>
+        </div>
+      `;
+    };
+
+    // ========== SELECT CHAT ==========
+    window.selectChat = async function(chatId) {
+      currentChatId = chatId;
+      currentReviewId = null;
+      document.getElementById('chatInputArea').style.display = 'block';
+      
+      const chat = allChats.find(c => c.id === chatId);
+      if (!chat) return;
+
+      renderSidebarList();
+      
+      const headerInfo = document.getElementById('headerInfo');
+      headerInfo.innerHTML = `
+        <h2>Chat with ${chat.clientName || 'Client'}</h2>
+        <p>${chat.clientEmail || 'No email'} • Subject: ${chat.subject || 'General Inquiry'}</p>
+      `;
+
+      document.getElementById('headerBadge').style.display = 'inline-block';
+      document.getElementById('headerBadge').innerHTML = `<i class="fas fa-comments"></i> ${chat.unreadCount || 0} unread`;
+
+      document.getElementById('dynamicContent').style.display = 'block';
+      document.getElementById('welcomeScreen').style.display = 'none';
+      document.getElementById('dynamicContent').innerHTML = `
+        <div class="chat-detail">
+          <div class="messages-container" id="messagesContainer">
+            <div class="loading-spinner">
+              <div class="spinner"></div>
+              <p>Loading messages...</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      await loadChatMessages(chatId);
+      markChatAsRead(chatId);
+    };
+
+    // ========== LOAD CHAT MESSAGES ==========
+    async function loadChatMessages(chatId) {
+      try {
+        const snapshot = await db.collection('chats').doc(chatId)
+          .collection('messages')
+          .orderBy('timestamp', 'asc')
+          .get();
+
+        currentMessages = [];
+        const container = document.getElementById('messagesContainer');
+        container.innerHTML = '';
+
+        if (snapshot.empty) {
+          container.innerHTML = '<div style="text-align: center; color: var(--gray); padding: 2rem;">No messages yet. Start the conversation!</div>';
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          const msg = { id: doc.id, ...doc.data() };
+          currentMessages.push(msg);
+          container.appendChild(renderMessage(msg));
+        });
+
+        container.scrollTop = container.scrollHeight;
+
+        // Setup realtime listener
+        if (messageListener) messageListener();
+        messageListener = db.collection('chats').doc(chatId)
+          .collection('messages')
+          .orderBy('timestamp', 'asc')
+          .onSnapshot(snapshot => {
+            snapshot.docChanges().forEach(change => {
+              if (change.type === 'added') {
+                const msg = { id: change.doc.id, ...change.doc.data() };
+                const exists = currentMessages.some(m => m.id === change.doc.id);
+                if (!exists) {
+                  currentMessages.push(msg);
+                  container.appendChild(renderMessage(msg));
+                  container.scrollTop = container.scrollHeight;
+                }
+              }
+            });
+          });
+
+      } catch (error) {
+        console.error("Error loading messages:", error);
+      }
+    }
+
+    function renderMessage(message) {
+      const div = document.createElement('div');
+      div.className = `message ${message.sender === 'client' ? 'client' : 'admin'}`;
+      
+      const timestamp = message.timestamp?.toDate() || new Date();
+      const timeString = timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      div.innerHTML = `
+        <div class="message-content">${message.content}</div>
+        <div class="message-meta">
+          <span>${message.sender === 'client' ? 'Client' : 'You'}</span>
+          <span>${timeString}</span>
+        </div>
+      `;
+      return div;
+    }
+
+    // ========== SEND MESSAGE ==========
+    document.getElementById('adminMessageForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const input = document.getElementById('adminMessageInput');
+      const content = input.value.trim();
+      const sendBtn = document.getElementById('sendMessageBtn');
+      
+      if (!content || !currentChatId || !currentAdmin) return;
+
+      try {
+        sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        sendBtn.disabled = true;
+
+        // Save message
+        await db.collection('chats').doc(currentChatId)
+          .collection('messages').add({
+            sender: 'admin',
+            senderEmail: currentAdmin.email,
+            content: content,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            read: false,
+            messageType: 'text'
+          });
+
+        // Update chat
+        await db.collection('chats').doc(currentChatId).update({
+          lastMessage: content,
+          lastMessageTime: firebase.firestore.FieldValue.serverTimestamp(),
+          unreadCount: firebase.firestore.FieldValue.increment(1),
+          status: 'replied',
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        input.value = '';
+        input.style.height = 'auto';
+        
+      } catch (error) {
+        console.error("Error sending message:", error);
+        alert('Failed to send message');
+      } finally {
+        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+        sendBtn.disabled = false;
+      }
+    });
+
+    // ========== MARK CHAT AS READ ==========
+    async function markChatAsRead(chatId) {
+      try {
+        await db.collection('chats').doc(chatId).update({ unreadCount: 0 });
+        await loadChats();
+        renderSidebarList();
+      } catch (error) {
+        console.error("Error marking as read:", error);
+      }
+    }
+
+    // ========== REVIEW ACTIONS ==========
+    window.approveReview = async function(reviewId) {
+      try {
+        await db.collection('reviews').doc(reviewId).update({
+          approved: true
+        });
+        await loadReviews();
+        selectReview(reviewId);
+      } catch (error) {
+        console.error("Error approving review:", error);
+      }
+    };
+
+    window.unapproveReview = async function(reviewId) {
+      try {
+        await db.collection('reviews').doc(reviewId).update({
+          approved: false
+        });
+        await loadReviews();
+        selectReview(reviewId);
+      } catch (error) {
+        console.error("Error unapproving review:", error);
+      }
+    };
+
+    window.deleteReview = async function(reviewId) {
+      if (!confirm('Are you sure you want to delete this review?')) return;
+      
+      try {
+        await db.collection('reviews').doc(reviewId).delete();
+        await loadReviews();
+        document.getElementById('dynamicContent').style.display = 'none';
+        document.getElementById('welcomeScreen').style.display = 'flex';
+        document.getElementById('headerBadge').style.display = 'none';
+        currentReviewId = null;
+        renderSidebarList();
+      } catch (error) {
+        console.error("Error deleting review:", error);
+      }
+    };
+
+    // ========== SEARCH ==========
+    document.getElementById('searchInput')?.addEventListener('input', (e) => {
+      searchTerm = e.target.value.toLowerCase();
+      renderSidebarList();
+    });
+
+    // ========== AUTO-RESIZE TEXTAREA ==========
+    document.getElementById('adminMessageInput')?.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    // Enter to send, Shift+Enter for new line
+    document.getElementById('adminMessageInput')?.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        document.getElementById('adminMessageForm').dispatchEvent(new Event('submit'));
+      }
+    });
+
+    // ========== UTILS ==========
+    function formatTime(date) {
+      const now = new Date();
+      const diff = now - date;
+      if (diff < 60*60*1000) return Math.floor(diff/(60*1000)) + 'm ago';
+      if (diff < 24*60*60*1000) return Math.floor(diff/(60*60*1000)) + 'h ago';
+      return date.toLocaleDateString();
+    }
+  </script>
+</body>
+</html>

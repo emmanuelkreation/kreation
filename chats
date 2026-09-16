@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Chat | Kreation Digitals</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ALL YOUR EXISTING CSS STAYS EXACTLY THE SAME */
+    :root {
+      --primary: #003333;
+      --secondary: #39FF14;
+      --accent: #00CC99;
+      --dark: #000000;
+      --light: #FFFFFF;
+      --gray: #AAAAAA;
+      --neon-glow: 0 0 10px rgba(57, 255, 20, 0.7);
+      --chat-bg: #0a0a0a;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    header {
+      background: rgba(0, 0, 0, 0.95);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--light);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .logo span { color: var(--secondary); }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    /* Main Chat Layout */
+    .chat-layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    /* Conversations Sidebar */
+    .conversations-sidebar {
+      width: 350px;
+      background: rgba(0, 51, 51, 0.1);
+      border-right: 1px solid rgba(57, 255, 20, 0.2);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+    }
+    
+    .sidebar-header h2 {
+      color: var(--light);
+      margin-bottom: 1rem;
+    }
+    
+    .new-chat-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      color: var(--secondary);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+    }
+    
+    .new-chat-btn:hover {
+      background: rgba(57, 255, 20, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .conversations-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    
+    .conversation-item {
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+    
+    .conversation-item:hover {
+      border-color: rgba(57, 255, 20, 0.3);
+      background: rgba(57, 255, 20, 0.05);
+    }
+    
+    .conversation-item.active {
+      border-color: var(--secondary);
+      background: rgba(57, 255, 20, 0.1);
+    }
+    
+    .conversation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .conversation-name {
+      color: var(--light);
+      font-weight: 500;
+    }
+    
+    .conversation-time {
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+    
+    .conversation-preview {
+      color: var(--gray);
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .unread-badge {
+      background: var(--secondary);
+      color: var(--dark);
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: auto;
+    }
+    
+    /* Main Chat Area */
+    .chat-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--chat-bg);
+    }
+    
+    .chat-header {
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chat-header-info h3 {
+      color: var(--light);
+      margin-bottom: 0.3rem;
+    }
+    
+    .chat-header-info p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    
+    .chat-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+    
+    .chat-messages {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .message {
+      max-width: 70%;
+      padding: 1rem;
+      border-radius: 15px;
+      position: relative;
+      animation: messageSlide 0.3s ease;
+    }
+    
+    @keyframes messageSlide {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .message.client {
+      align-self: flex-start;
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      border-top-left-radius: 5px;
+    }
+    
+    .message.admin {
+      align-self: flex-end;
+      background: rgba(0, 51, 51, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      border-top-right-radius: 5px;
+    }
+    
+    .message-content {
+      color: var(--light);
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    
+    .message-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    
+    .message-sender {
+      font-weight: 500;
+    }
+    
+    /* Message Input */
+    .chat-input-area {
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(57, 255, 20, 0.2);
+    }
+    
+    .message-form {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+    
+    .message-input {
+      flex: 1;
+      min-height: 50px;
+      max-height: 150px;
+      padding: 0.8rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(57, 255, 20, 0.2);
+      border-radius: 10px;
+      color: var(--light);
+      font-family: inherit;
+      resize: none;
+      overflow-y: auto;
+      transition: all 0.3s;
+    }
+    
+    .message-input:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.2);
+    }
+    
+    .send-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      border: none;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s;
+      font-size: 1.2rem;
+    }
+    
+    .send-btn:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Welcome Screen */
+    .welcome-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .welcome-icon {
+      font-size: 4rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .welcome-screen h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+    
+    .welcome-screen p {
+      color: var(--gray);
+      max-width: 500px;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .modal-content {
+      background: var(--dark);
+      padding: 2.5rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      animation: modalSlide 0.4s ease;
+    }
+    
+    @keyframes modalSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    .modal-content h2 {
+      color: var(--light);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    
+    .modal-form input,
+    .modal-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      border-radius: 10px;
+      color: var(--light);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    .modal-form input:focus,
+    .modal-form textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.2);
+    }
+    
+    .modal-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .modal-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .modal-btn {
+      flex: 1;
+      padding: 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .modal-btn.primary {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: var(--dark);
+    }
+    
+    .modal-btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(57, 255, 20, 0.3);
+    }
+    
+    .modal-btn.secondary {
+      background: rgba(255, 59, 48, 0.1);
+      border: 1px solid rgba(255, 59, 48, 0.3);
+      color: #ff3b30;
+    }
+    
+    .modal-btn.secondary:hover {
+      background: rgba(255, 59, 48, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .conversations-sidebar {
+        width: 100%;
+        position: fixed;
+        height: 100%;
+        z-index: 100;
+        display: none;
+      }
+      
+      .sidebar-open .conversations-sidebar {
+        display: flex;
+      }
+      
+      .chat-main {
+        width: 100%;
+      }
+      
+      .message {
+        max-width: 85%;
+      }
+      
+      .modal-content {
+        padding: 1.5rem;
+      }
+    }
+    
+    /* Loading Animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(57, 255, 20, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--secondary);
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Status Indicators */
+    .status-online {
+      color: var(--secondary);
+      animation: pulse 2s infinite;
+    }
+    
+    .status-offline {
+      color: var(--gray);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">Kreation <span>Digital</span>Hub</a>
+    <div class="user-info">
+      <div class="user-avatar" id="userAvatar">U</div>
+      <div>
+        <div id="userName">Guest User</div>
+        <small id="userEmail">guest@example.com</small>
+      </div>
+    </div>
+  </header>
+
+  <div class="chat-layout">
+    <!-- Chats Sidebar -->
+    <aside class="conversations-sidebar">
+      <div class="sidebar-header">
+        <h2>Your Chats</h2>
+        <button class="new-chat-btn" onclick="startNewChat()">
+          <i class="fas fa-plus"></i>
+          New Chat
+        </button>
+      </div>
+      
+      <div class="conversations-list" id="chatsList">
+        <div style="text-align: center; padding: 2rem; color: var(--gray);">
+          <i class="fas fa-comments" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+          <p>Loading your chats...</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-icon">
+          <i class="fas fa-comments"></i>
+        </div>
+        <h2>Welcome to Live Chat</h2>
+        <p>Start a new chat or select an existing one from the sidebar.</p>
+        <button class="new-chat-btn" onclick="startNewChat()" style="width: auto; padding: 1rem 2rem;">
+          <i class="fas fa-plus"></i>
+          Start New Chat
+        </button>
+      </div>
+
+      <!-- Active Chat Area (hidden by default) -->
+      <div id="activeChat" style="display: none; height: 100%;">
+        <div class="chat-header">
+          <div class="chat-header-info">
+            <h3 id="chatWithName">Kreation Digitals Support</h3>
+            <p id="chatSubject">Subject: <span id="subjectText"></span></p>
+          </div>
+          <div class="chat-status">
+            <i class="fas fa-circle"></i>
+            <span id="chatStatus" class="status-online">Online</span>
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <div style="text-align: center; padding: 2rem; color: var(--gray);">
+            <p>Select a chat to start messaging</p>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <form id="messageForm">
+            <div class="message-form">
+              <textarea 
+                class="message-input" 
+                id="messageInput" 
+                placeholder="Type your message here..." 
+                rows="1"
+                required
+              ></textarea>
+              <button type="submit" class="send-btn">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New Chat Modal -->
+  <div id="newChatModal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>Start New Chat</h2>
+      <form id="newChatForm" class="modal-form">
+        <input type="text" id="clientName" placeholder="Your Name" required>
+        <input type="email" id="clientEmail" placeholder="Your Email" required>
+        <input type="text" id="conversationSubject" placeholder="Subject" required>
+        <textarea id="initialMessage" placeholder="Your initial message..." rows="3" required></textarea>
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn primary">
+            <i class="fas fa-comment"></i>
+            Start Chat
+          </button>
+          <button type="button" onclick="closeNewChatModal()" class="modal-btn secondary">
+            <i class="fas fa-times"></i>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+  <script>
+  // === FIXED: CORRECT FIREBASE CONFIGURATION (USING WORKING KEYS) ===
+  const firebaseConfig = {
+    apiKey: "AIzaSyBRzk76wD5W3zvSLMyXxZp4zJ-1zMCmMPg",
+    authDomain: "reviews-d3d7a.firebaseapp.com",
+    projectId: "reviews-d3d7a",
+    storageBucket: "reviews-d3d7a.firebasestorage.app",
+    messagingSenderId: "134697578964",
+    appId: "1:134697578964:web:813ec1b41efaa270512641"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+
+  console.log("🔥 Firebase initialized successfully with WORKING config");
+
+  // === GLOBAL STATE ===
+  let currentUser = null;
+  let currentChatId = null;
+  let chats = [];
+  let currentMessages = [];
+  let messageListener = null;
+  let chatListener = null;
+
+  // === DOM ELEMENTS ===
+  const getElement = (id) => document.getElementById(id);
+  
+  // === MODAL FUNCTIONS ===
+  window.startNewChat = function() {
+    console.log("📝 Opening new chat modal...");
+    
+    const savedName = localStorage.getItem('chatUserName');
+    const savedEmail = localStorage.getItem('chatUserEmail');
+    
+    if (savedName) getElement('clientName').value = savedName;
+    if (savedEmail) getElement('clientEmail').value = savedEmail;
+    
+    getElement('newChatModal').style.display = 'flex';
+    getElement('clientName').focus();
+  };
+
+  window.closeNewChatModal = function() {
+    console.log("❌ Closing modal...");
+    getElement('newChatModal').style.display = 'none';
+    getElement('newChatForm').reset();
+  };
+
+  // === USER MANAGEMENT ===
+  function initializeUser() {
+    console.log("👤 Initializing user...");
+    
+    let userName = localStorage.getItem('chatUserName');
+    let userEmail = localStorage.getItem('chatUserEmail');
+    
+    if (!userName || !userEmail) {
+      userName = "Guest User";
+      userEmail = "guest@example.com";
+    }
+    
+    getElement('userName').textContent = userName;
+    getElement('userEmail').textContent = userEmail;
+    getElement('userAvatar').textContent = userName.charAt(0).toUpperCase();
+    
+    currentUser = {
+      name: userName,
+      email: userEmail,
+      id: userEmail
+    };
+    
+    console.log("✅ User initialized:", currentUser);
+    loadChats();
+    setupRealtimeUpdates();
+  }
+
+  // === LOAD CHATS ===
+  async function loadChats() {
+    if (!currentUser || !currentUser.email) {
+      console.log("⚠️ No user email, skipping chat load");
+      return;
+    }
+    
+    try {
+      console.log("📨 Loading chats for:", currentUser.email);
+      
+      const snapshot = await db.collection('chats')
+        .where('participants', 'array-contains', currentUser.email)
+        .orderBy('lastMessageTime', 'desc')
+        .get();
+      
+      chats = [];
+      const chatsList = getElement('chatsList');
+      chatsList.innerHTML = '';
+      
+      if (snapshot.empty) {
+        console.log("📭 No chats found");
+        chatsList.innerHTML = `
+          <div style="text-align: center; padding: 3rem 1rem; color: var(--gray);">
+            <i class="fas fa-comments" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+            <p style="font-size: 1.1rem;">No chats yet.</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Start your first chat with our team!</p>
+          </div>
+        `;
+        return;
+      }
+      
+      console.log(`✅ Found ${snapshot.size} chat(s)`);
+      
+      snapshot.forEach(doc => {
+        const chat = {
+          id: doc.id,
+          ...doc.data()
+        };
+        chats.push(chat);
+        renderChatItem(chat);
+      });
+      
+    } catch (error) {
+      console.error("❌ Error loading chats:", error);
+      
+      // SPECIAL HANDLER FOR INDEX ERROR
+      if (error.message.includes('index')) {
+        const indexUrl = error.message.match(/https:\/\/console\.firebase\.google\.com[^\s]*/);
+        
+        getElement('chatsList').innerHTML = `
+          <div style="text-align: center; padding: 2rem; color: var(--gray); border: 1px solid rgba(57, 255, 20, 0.3); border-radius: 10px;">
+            <i class="fas fa-database" style="font-size: 2rem; margin-bottom: 1rem; color: var(--secondary);"></i>
+            <p style="font-weight: bold; margin-bottom: 0.5rem;">🔧 One-time setup required</p>
+            <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Click the button below to create the database index:</p>
+            <a href="${indexUrl[0]}" target="_blank" style="display: inline-block; background: var(--secondary); color: var(--dark); padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 1rem;">📌 CREATE INDEX</a>
+            <p style="font-size: 0.8rem; opacity: 0.7;">After creating the index, wait 2 minutes and refresh the page.</p>
+          </div>
+        `;
+      } else {
+        showError("Failed to load chats: " + error.message);
+      }
+    }
+  }
+
+  // === RENDER CHAT ITEM - FIXED TO HANDLE BOTH TIMESTAMP TYPES ===
+  function renderChatItem(chat) {
+    const item = document.createElement('div');
+    item.className = 'conversation-item';
+    item.id = `chat-${chat.id}`;
+    
+    // ✅ FIXED: Safely handle timestamp from both Firestore and local object
+    let lastMessageTime;
+    if (chat.lastMessageTime?.toDate) {
+      // Firestore timestamp
+      lastMessageTime = chat.lastMessageTime.toDate();
+    } else if (chat.lastMessageTime instanceof Date) {
+      // JavaScript Date object
+      lastMessageTime = chat.lastMessageTime;
+    } else if (chat.lastMessageTime?.seconds) {
+      // Firestore timestamp object without toDate method
+      lastMessageTime = new Date(chat.lastMessageTime.seconds * 1000);
+    } else {
+      // Fallback
+      lastMessageTime = new Date();
+    }
+    
+    const timeString = formatTime(lastMessageTime);
+    
+    item.innerHTML = `
+      <div class="conversation-header">
+        <div class="conversation-name">Support Team</div>
+        <div class="conversation-time">${timeString}</div>
+        ${chat.unreadCount > 0 ? `<span class="unread-badge">${chat.unreadCount}</span>` : ''}
+      </div>
+      <div class="conversation-preview">${chat.subject || 'New Chat'}</div>
+    `;
+    
+    item.onclick = () => openChat(chat.id);
+    getElement('chatsList').appendChild(item);
+  }
+
+  // === OPEN CHAT ===
+  async function openChat(chatId) {
+    console.log("💬 Opening chat:", chatId);
+    
+    currentChatId = chatId;
+    
+    // First try to find in loaded chats
+    let chat = chats.find(c => c.id === chatId);
+    
+    // If not found, fetch it directly
+    if (!chat) {
+      try {
+        const chatDoc = await db.collection('chats').doc(chatId).get();
+        if (chatDoc.exists) {
+          chat = {
+            id: chatDoc.id,
+            ...chatDoc.data()
+          };
+          chats.push(chat);
+          renderChatItem(chat);
+        } else {
+          console.error("❌ Chat not found:", chatId);
+          return;
+        }
+      } catch (error) {
+        console.error("❌ Error fetching chat:", error);
+        return;
+      }
+    }
+    
+    // Update UI
+    getElement('chatWithName').textContent = 'Kreation Digitals Support';
+    getElement('subjectText').textContent = chat.subject || 'General Inquiry';
+    
+    getElement('welcomeScreen').style.display = 'none';
+    getElement('activeChat').style.display = 'flex';
+    getElement('activeChat').style.flexDirection = 'column';
+    
+    document.querySelectorAll('.conversation-item').forEach(item => {
+      item.classList.remove('active');
+    });
+    document.getElementById(`chat-${chatId}`)?.classList.add('active');
+    
+    await loadMessages(chatId);
+    await markChatAsRead(chatId);
+    setupMessageListener(chatId);
+    
+    setTimeout(() => {
+      getElement('messageInput').focus();
+    }, 100);
+  }
+
+  // === LOAD MESSAGES ===
+  async function loadMessages(chatId) {
+    try {
+      const snapshot = await db.collection('chats')
+        .doc(chatId)
+        .collection('messages')
+        .orderBy('timestamp', 'asc')
+        .get();
+      
+      const chatMessages = getElement('chatMessages');
+      chatMessages.innerHTML = '';
+      currentMessages = [];
+      
+      if (snapshot.empty) {
+        chatMessages.innerHTML = `
+          <div style="text-align: center; padding: 3rem 1rem; color: var(--gray);">
+            <p>No messages yet. Start the conversation!</p>
+          </div>
+        `;
+        return;
+      }
+      
+      snapshot.forEach(doc => {
+        const msg = {
+          id: doc.id,
+          ...doc.data()
+        };
+        currentMessages.push(msg);
+        renderMessage(msg);
+      });
+      
+      setTimeout(() => {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 100);
+      
+      console.log(`✅ Loaded ${snapshot.size} message(s)`);
+      
+    } catch (error) {
+      console.error("❌ Error loading messages:", error);
+      showError("Failed to load messages.");
+    }
+  }
+
+  // === RENDER MESSAGE ===
+  function renderMessage(message) {
+    const chatMessages = getElement('chatMessages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${message.sender === 'client' ? 'client' : 'admin'}`;
+    
+    const timestamp = message.timestamp?.toDate ? message.timestamp.toDate() : new Date();
+    const timeString = timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    messageDiv.innerHTML = `
+      <div class="message-content">${message.content}</div>
+      <div class="message-meta">
+        <span class="message-sender">${message.sender === 'client' ? 'You' : 'Kreation Digitals'}</span>
+        <span class="message-time">${timeString}</span>
+      </div>
+    `;
+    
+    chatMessages.appendChild(messageDiv);
+  }
+
+  // === SEND MESSAGE ===
+  async function sendMessage(event) {
+    if (event) event.preventDefault();
+    
+    const messageInput = getElement('messageInput');
+    const content = messageInput.value.trim();
+    
+    if (!content) return;
+    if (!currentChatId) {
+      alert("Please start or select a chat first.");
+      return;
+    }
+    if (!currentUser || !currentUser.email) return;
+    
+    console.log("📤 Sending message:", content.substring(0, 50) + "...");
+    
+    try {
+      const sendBtn = document.querySelector('.send-btn');
+      const originalIcon = sendBtn.innerHTML;
+      sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+      sendBtn.disabled = true;
+      
+      await db.collection('chats')
+        .doc(currentChatId)
+        .collection('messages')
+        .add({
+          sender: 'client',
+          senderEmail: currentUser.email,
+          content: content,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          read: false,
+          messageType: 'text'
+        });
+      
+      await db.collection('chats')
+        .doc(currentChatId)
+        .update({
+          lastMessage: content,
+          lastMessageTime: firebase.firestore.FieldValue.serverTimestamp(),
+          unreadCount: firebase.firestore.FieldValue.increment(1),
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      
+      console.log("✅ Message sent successfully");
+      
+      messageInput.value = '';
+      messageInput.style.height = 'auto';
+      
+      sendBtn.innerHTML = originalIcon;
+      sendBtn.disabled = false;
+      
+    } catch (error) {
+      console.error("❌ Error sending message:", error);
+      showError("Failed to send message. Please try again.");
+      
+      const sendBtn = document.querySelector('.send-btn');
+      sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+      sendBtn.disabled = false;
+    }
+  }
+
+  // === CREATE NEW CHAT - FIXED TIMESTAMP ERROR ===
+  window.createNewConversation = async function(event) {
+    if (event) event.preventDefault();
+    
+    console.log("🚀 Creating new chat...");
+    
+    const name = getElement('clientName').value.trim();
+    const email = getElement('clientEmail').value.trim();
+    const subject = getElement('conversationSubject').value.trim();
+    const initialMessage = getElement('initialMessage').value.trim();
+    
+    if (!name || !email || !subject || !initialMessage) {
+      alert('❌ Please fill all fields');
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('❌ Please enter a valid email address');
+      return;
+    }
+    
+    const submitBtn = document.querySelector('#newChatForm button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="loading"></span> Creating...';
+    submitBtn.disabled = true;
+    
+    try {
+      localStorage.setItem('chatUserName', name);
+      localStorage.setItem('chatUserEmail', email);
+      
+      currentUser = {
+        name: name,
+        email: email,
+        id: email
+      };
+      
+      getElement('userName').textContent = name;
+      getElement('userEmail').textContent = email;
+      getElement('userAvatar').textContent = name.charAt(0).toUpperCase();
+      
+      console.log("📝 Creating chat in Firestore...");
+      
+      const chatRef = await db.collection('chats').add({
+        clientName: name,
+        clientEmail: email,
+        clientId: email,
+        subject: subject,
+        lastMessage: initialMessage,
+        lastMessageTime: firebase.firestore.FieldValue.serverTimestamp(),
+        unreadCount: 1,
+        status: 'active',
+        participants: [email, 'admin@kreationdigitals.com'],
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      
+      await chatRef.collection('messages').add({
+        sender: 'client',
+        senderEmail: email,
+        content: initialMessage,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        read: false,
+        messageType: 'text'
+      });
+      
+      console.log("✅ Chat created with ID:", chatRef.id);
+      
+      // ✅ FIXED: Create a proper Firestore-like timestamp object with toDate method
+      const now = new Date();
+      const mockTimestamp = {
+        seconds: Math.floor(now.getTime() / 1000),
+        nanoseconds: 0,
+        toDate: function() { return new Date(this.seconds * 1000); }
+      };
+      
+      // Add chat to local array with CORRECT timestamp format
+      const newChat = {
+        id: chatRef.id,
+        clientName: name,
+        clientEmail: email,
+        subject: subject,
+        lastMessage: initialMessage,
+        lastMessageTime: mockTimestamp, // ✅ Now has toDate() method
+        unreadCount: 1,
+        status: 'active',
+        participants: [email, 'admin@kreationdigitals.com']
+      };
+      
+      chats.unshift(newChat);
+      renderChatItem(newChat);
+      
+      closeNewChatModal();
+      
+      currentChatId = chatRef.id;
+      await openChat(chatRef.id);
+      showSuccess("Chat started successfully!");
+      
+    } catch (error) {
+      console.error("❌ Error creating chat:", error);
+      showError("Failed to start chat: " + error.message);
+      
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }
+  };
+
+  // === MARK CHAT AS READ ===
+  async function markChatAsRead(chatId) {
+    try {
+      await db.collection('chats')
+        .doc(chatId)
+        .update({ unreadCount: 0 });
+      console.log("✅ Chat marked as read");
+    } catch (error) {
+      console.error("❌ Error marking chat as read:", error);
+    }
+  }
+
+  // === FORMAT TIME ===
+  function formatTime(date) {
+    if (!date) return 'Just now';
+    
+    const now = new Date();
+    const diff = now - date;
+    
+    if (diff < 60 * 60 * 1000) {
+      const minutes = Math.floor(diff / (60 * 1000));
+      return minutes === 0 ? 'Just now' : `${minutes}m ago`;
+    } else if (diff < 24 * 60 * 60 * 1000) {
+      return Math.floor(diff / (60 * 60 * 1000)) + 'h ago';
+    } else {
+      return date.toLocaleDateString();
+    }
+  }
+
+  // === REAL-TIME UPDATES ===
+  function setupRealtimeUpdates() {
+    if (!currentUser || !currentUser.email) return;
+    
+    console.log("🔔 Setting up real-time updates...");
+    
+    if (chatListener) chatListener();
+    
+    chatListener = db.collection('chats')
+      .where('participants', 'array-contains', currentUser.email)
+      .orderBy('lastMessageTime', 'desc')
+      .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === 'added' || change.type === 'modified') {
+            loadChats();
+          }
+        });
+      }, (error) => {
+        console.error("❌ Real-time update error:", error);
+      });
+  }
+
+  function setupMessageListener(chatId) {
+    if (messageListener) messageListener();
+    
+    messageListener = db.collection('chats')
+      .doc(chatId)
+      .collection('messages')
+      .orderBy('timestamp', 'asc')
+      .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === 'added') {
+            const message = change.doc.data();
+            
+            const messageExists = currentMessages.some(m => 
+              m.id === change.doc.id ||
+              (m.content === message.content && 
+               m.sender === message.sender &&
+               Math.abs((m.timestamp?.toDate?.() || 0) - (message.timestamp?.toDate?.() || 0)) < 1000)
+            );
+            
+            if (!messageExists) {
+              currentMessages.push({
+                id: change.doc.id,
+                ...message
+              });
+              renderMessage(message);
+              
+              setTimeout(() => {
+                getElement('chatMessages').scrollTop = getElement('chatMessages').scrollHeight;
+              }, 100);
+            }
+          }
+        });
+      });
+  }
+
+  // === NOTIFICATION FUNCTIONS ===
+  function showError(message) { showNotification(message, 'error'); }
+  function showSuccess(message) { showNotification(message, 'success'); }
+  
+  function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: ${type === 'error' ? 'rgba(255, 59, 48, 0.95)' : type === 'success' ? 'rgba(57, 255, 20, 0.95)' : 'rgba(0, 51, 51, 0.95)'};
+      color: ${type === 'success' ? 'black' : 'white'};
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      z-index: 2000;
+      max-width: 350px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid ${type === 'error' ? 'rgba(255, 59, 48, 0.3)' : type === 'success' ? 'rgba(57, 255, 20, 0.3)' : 'rgba(57, 255, 20, 0.2)'};
+      font-weight: 500;
+    `;
+    
+    const icon = type === 'error' ? 'fa-exclamation-circle' : 
+                type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
+    
+    notification.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease';
+      setTimeout(() => notification.remove(), 300);
+    }, 5000);
+  }
+
+  // === INITIALIZATION ===
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log("🚀 Initializing chat application...");
+    
+    initializeUser();
+    
+    const messageForm = getElement('messageForm');
+    if (messageForm) messageForm.addEventListener('submit', sendMessage);
+    
+    const newChatForm = getElement('newChatForm');
+    if (newChatForm) newChatForm.addEventListener('submit', window.createNewConversation);
+    
+    const messageInput = getElement('messageInput');
+    if (messageInput) {
+      messageInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+      });
+      
+      messageInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage(e);
+        }
+      });
+    }
+    
+    const modal = getElement('newChatModal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) closeNewChatModal();
+      });
+    }
+    
+    window.addEventListener('online', () => {
+      const status = getElement('chatStatus');
+      if (status) {
+        status.textContent = 'Online';
+        status.className = 'status-online';
+      }
+      showSuccess("You're back online!");
+    });
+    
+    window.addEventListener('offline', () => {
+      const status = getElement('chatStatus');
+      if (status) {
+        status.textContent = 'Offline';
+        status.className = 'status-offline';
+      }
+      showError("You're offline. Messages will be sent when you reconnect.");
+    });
+    
+    console.log("✅ Chat application initialized successfully");
+  });
+
+  // Animation styles
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    .fa-spinner { animation: spin 1s linear infinite; }
+  `;
+  document.head.appendChild(style);
+  </script>
+</body>
+</html>

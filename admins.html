@@ -12,6 +12,7 @@
     --primary: #003333; --secondary: #39FF14; --accent: #00CC99;
     --dark: #000000; --light: #FFFFFF; --gray: #AAAAAA;
     --danger: #ff3b30; --warning: #ff9500; --success: #4CAF50; --info: #5ac8fa;
+    --pink: #ff4d6d;
     --card-bg: rgba(0, 51, 51, 0.3);
     --neon-glow: 0 0 10px rgba(57,255,20,0.7), 0 0 20px rgba(57,255,20,0.5), 0 0 30px rgba(57,255,20,0.3);
   }
@@ -235,9 +236,7 @@
 
   /* ---------- BLOG EDITOR ---------- */
   .blog-editor { max-width: 1000px; margin: 0 auto; }
-  .editor-grid {
-    display: grid; grid-template-columns: 1fr 340px; gap: 1.8rem;
-  }
+  .editor-grid { display: grid; grid-template-columns: 1fr 340px; gap: 1.8rem; }
   .editor-main, .editor-side {
     background: rgba(0,0,0,0.35); border: 1px solid rgba(57,255,20,0.2);
     border-radius: 14px; padding: 1.6rem;
@@ -259,6 +258,7 @@
   }
   .field textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   .field .hint { font-size: 0.7rem; color: var(--gray); margin-top: 0.35rem; opacity: 0.8; }
+  .field .hint code { background: rgba(0,0,0,0.6); color: var(--secondary); padding: 0.1rem 0.35rem; border-radius: 4px; }
 
   #postContent { min-height: 380px; font-family: 'SF Mono', 'Monaco', 'Consolas', monospace; font-size: 0.9rem; }
 
@@ -290,6 +290,42 @@
   .cover-preview {
     width: 100%; height: 160px; object-fit: cover; border-radius: 10px;
     margin-top: 0.6rem; border: 1px solid rgba(57,255,20,0.25); display: none;
+  }
+
+  /* ---------- ENGAGEMENT PANEL ---------- */
+  .engagement-panel {
+    margin-top: 2rem; background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 1.6rem;
+  }
+  .engagement-stats {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem; margin-bottom: 1.4rem;
+    padding-bottom: 1.2rem; border-bottom: 1px solid rgba(57,255,20,0.15);
+  }
+  .engagement-stat-block { text-align: center; flex: 1; min-width: 120px; }
+  .engagement-stat-label {
+    font-size: 0.72rem; color: var(--gray); text-transform: uppercase;
+    letter-spacing: 0.6px; margin-bottom: 0.3rem;
+  }
+  .engagement-stat-value { font-size: 2.2rem; font-weight: 800; line-height: 1.1; }
+  .engagement-stat-value.likes { color: var(--pink); }
+  .engagement-stat-value.comments { color: var(--secondary); }
+
+  .comments-admin-list { display: flex; flex-direction: column; gap: 0.7rem; }
+  .admin-comment {
+    background: rgba(0,51,51,0.4); border: 1px solid rgba(57,255,20,0.15);
+    border-left: 3px solid var(--secondary); border-radius: 8px; padding: 1rem 1.2rem;
+  }
+  .admin-comment-head {
+    display: flex; justify-content: space-between; gap: 1rem;
+    margin-bottom: 0.4rem; flex-wrap: wrap;
+  }
+  .admin-comment-name { color: var(--light); font-weight: 700; font-size: 0.95rem; }
+  .admin-comment-email { color: var(--gray); font-size: 0.8rem; margin-left: 0.5rem; }
+  .admin-comment-date { color: var(--gray); font-size: 0.75rem; }
+  .admin-comment-text {
+    color: rgba(255,255,255,0.88); font-size: 0.9rem; line-height: 1.55;
+    white-space: pre-wrap; margin-bottom: 0.7rem; word-break: break-word;
   }
 
   /* ---------- REVIEW / CHAT DETAIL ---------- */
@@ -439,12 +475,9 @@
   <!-- DASHBOARD -->
   <div id="dashboard">
     <div class="admin-layout">
-      <!-- SIDEBAR -->
       <aside class="sidebar">
         <div class="sidebar-header">
-          <div class="admin-logo">
-            <i class="fas fa-robot"></i> Kreation <span>Hub</span>
-          </div>
+          <div class="admin-logo"><i class="fas fa-robot"></i> Kreation <span>Hub</span></div>
 
           <div class="stats-grid">
             <div class="stat-card">
@@ -482,7 +515,6 @@
           </div>
         </div>
 
-        <!-- FILTERS -->
         <div id="reviewsFilter" class="filter-tabs">
           <button class="filter-btn active" onclick="filterReviews('all')">All</button>
           <button class="filter-btn" onclick="filterReviews('pending')">Pending</button>
@@ -510,7 +542,6 @@
         </div>
       </aside>
 
-      <!-- MAIN -->
       <main class="main-content">
         <div class="content-header">
           <div class="header-info" id="headerInfo">
@@ -688,15 +719,12 @@
         document.getElementById(t + 'Filter').style.display = t === tab ? 'flex' : 'none';
       });
 
-      // reset filter buttons
       document.querySelectorAll('#' + tab + 'Filter .filter-btn').forEach((b, i) => {
         b.classList.toggle('active', i === 0);
       });
 
-      // toggle New Post button
       document.getElementById('newPostBtn').style.display = tab === 'blog' ? 'inline-flex' : 'none';
 
-      // reset main area
       currentReviewId = null;
       currentChatId = null;
       currentPostId = null;
@@ -725,7 +753,7 @@
     };
 
     /* ============================================================
-       SIDEBAR RENDER
+       SIDEBAR
     ============================================================ */
     function renderSidebarList() {
       const el = document.getElementById('itemsList');
@@ -831,11 +859,20 @@
             <div class="item-preview">${esc((p.excerpt || p.content || '').substring(0, 70))}...</div>
             <div class="item-meta">
               <span><i class="far fa-calendar"></i> ${date}</span>
-              <span><i class="fas fa-heart"></i> ${p.likeCount || 0}</span>
+              <span><i class="fas fa-heart" style="color:#ff4d6d;"></i> <span data-likes="${p.id}">·</span></span>
             </div>
             ${tags ? `<div class="item-tags">${tags}</div>` : ''}
           </div>`;
       }).join('');
+
+      // Fetch real like counts
+      list.forEach(async p => {
+        try {
+          const snap = await db.collection('posts').doc(p.id).collection('likes').get();
+          const el2 = document.querySelector(`[data-likes="${p.id}"]`);
+          if (el2) el2.textContent = snap.size;
+        } catch (e) { /* ignore */ }
+      });
     }
 
     /* ============================================================
@@ -1020,7 +1057,7 @@
     }
 
     /* ============================================================
-       BLOG — EDITOR
+       BLOG
     ============================================================ */
     window.newPost = function () {
       currentPostId = null;
@@ -1053,19 +1090,16 @@
                 <label>Title *</label>
                 <input type="text" id="postTitle" placeholder="e.g. 5 Web Design Trends to Watch in 2026" value="${post ? esc(post.title || '') : ''}">
               </div>
-
               <div class="field">
                 <label>Excerpt (short summary for the blog card)</label>
                 <textarea id="postExcerpt" rows="2" placeholder="A one or two sentence summary...">${post ? esc(post.excerpt || '') : ''}</textarea>
               </div>
-
               <div class="field">
                 <label>Content * — Markdown supported</label>
                 <textarea id="postContent" placeholder="# Heading&#10;&#10;Write your paragraphs here.&#10;&#10;## Sub-heading&#10;&#10;- Bullet point&#10;- Another point&#10;&#10;**Bold**, *italic*, \`code\`, [link](https://example.com)&#10;&#10;> A quote">${post ? esc(post.content || '') : ''}</textarea>
                 <div class="hint">Use <code>#</code> for headings, <code>-</code> for bullets, <code>**bold**</code>, <code>*italic*</code>, <code>&gt;</code> for quotes.</div>
               </div>
             </div>
-
             <div class="editor-side">
               <div class="toggle-row">
                 <span>Published (visible on blog)</span>
@@ -1074,23 +1108,19 @@
                   <span class="slider"></span>
                 </label>
               </div>
-
               <div class="field">
                 <label>Cover Image URL</label>
                 <input type="text" id="postCover" placeholder="https://..." value="${post ? esc(post.coverImage || '') : ''}" oninput="previewCover()">
                 <img id="coverPreview" class="cover-preview" alt="">
               </div>
-
               <div class="field">
                 <label>Tags (comma separated)</label>
                 <input type="text" id="postTags" placeholder="Web Design, SEO, Tips" value="${post ? esc((post.tags || []).join(', ')) : ''}">
               </div>
-
               <div class="field">
                 <label>Author Name</label>
                 <input type="text" id="postAuthor" placeholder="Kreation Digital Hub" value="${post ? esc(post.authorName || '') : ''}">
               </div>
-
               <div class="editor-actions">
                 <button class="btn btn-primary" onclick="savePost()">
                   <i class="fas fa-save"></i> ${post ? 'Save Changes' : 'Create Post'}
@@ -1102,10 +1132,88 @@
               </div>
             </div>
           </div>
+
+          ${post ? `
+            <div class="engagement-panel">
+              <div class="engagement-stats">
+                <div class="engagement-stat-block">
+                  <div class="engagement-stat-label">Total Likes</div>
+                  <div class="engagement-stat-value likes" id="postLikeCount">—</div>
+                </div>
+                <div class="engagement-stat-block">
+                  <div class="engagement-stat-label">Comments</div>
+                  <div class="engagement-stat-value comments" id="postCommentCount">—</div>
+                </div>
+              </div>
+
+              <h3 style="font-size:1.05rem; margin-bottom:0.9rem; color:var(--light); display:flex; align-items:center; gap:0.5rem;">
+                <i class="fas fa-comments" style="color:var(--secondary);"></i> Reader Comments
+              </h3>
+              <div id="adminCommentsList" class="comments-admin-list">
+                <div style="color:var(--gray); font-size:0.9rem;">Loading comments...</div>
+              </div>
+            </div>
+          ` : ''}
         </div>`;
 
       previewCover();
+
+      if (post) loadPostEngagement(post.id);
     }
+
+    async function loadPostEngagement(postId) {
+      // Likes
+      try {
+        const likesSnap = await db.collection('posts').doc(postId).collection('likes').get();
+        document.getElementById('postLikeCount').textContent = likesSnap.size;
+      } catch (e) { document.getElementById('postLikeCount').textContent = '0'; }
+
+      // Comments
+      try {
+        const cs = await db.collection('posts').doc(postId).collection('comments').get();
+        const comments = cs.docs.map(d => ({ id: d.id, ...d.data() }));
+        comments.sort((a, b) => {
+          const at = a.createdAt?.toDate?.()?.getTime() || 0;
+          const bt = b.createdAt?.toDate?.()?.getTime() || 0;
+          return bt - at;
+        });
+        document.getElementById('postCommentCount').textContent = comments.length;
+        const list = document.getElementById('adminCommentsList');
+        if (!comments.length) {
+          list.innerHTML = `<div style="color:var(--gray); font-size:0.9rem;">No comments yet.</div>`;
+          return;
+        }
+        list.innerHTML = comments.map(c => `
+          <div class="admin-comment">
+            <div class="admin-comment-head">
+              <div>
+                <span class="admin-comment-name">${esc(c.name || 'Anonymous')}</span>
+                <span class="admin-comment-email">${esc(c.email || '')}</span>
+              </div>
+              <span class="admin-comment-date">${c.createdAt?.toDate?.().toLocaleString() || '—'}</span>
+            </div>
+            <div class="admin-comment-text">${esc(c.text || '')}</div>
+            <button class="btn btn-danger" style="font-size:0.75rem; padding:0.35rem 0.9rem;" onclick="deleteComment('${postId}', '${c.id}')">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        `).join('');
+      } catch (e) {
+        document.getElementById('postCommentCount').textContent = '0';
+        document.getElementById('adminCommentsList').innerHTML = `<div style="color:var(--danger); font-size:0.85rem;">Could not load comments: ${esc(e.message)}</div>`;
+      }
+    }
+
+    window.deleteComment = async function (postId, commentId) {
+      if (!confirm('Delete this comment permanently?')) return;
+      try {
+        await db.collection('posts').doc(postId).collection('comments').doc(commentId).delete();
+        showToast('Comment deleted');
+        loadPostEngagement(postId);
+      } catch (e) {
+        alert('Delete failed: ' + e.message);
+      }
+    };
 
     window.previewCover = function () {
       const url = document.getElementById('postCover').value.trim();
@@ -1136,13 +1244,7 @@
       const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean) : [];
 
       const data = {
-        title,
-        excerpt,
-        content,
-        coverImage,
-        tags,
-        authorName,
-        published,
+        title, excerpt, content, coverImage, tags, authorName, published,
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       };
 
@@ -1160,6 +1262,7 @@
         renderSidebarList();
         document.getElementById('headerInfo').innerHTML = `<h2>Editing: ${esc(title)}</h2><p>${published ? 'Published' : 'Draft'} • Just saved</p>`;
         showToast('Post saved successfully!');
+        if (currentPostId) loadPostEngagement(currentPostId);
       } catch (e) {
         alert('Save failed: ' + e.message);
       }
@@ -1205,7 +1308,7 @@
     };
 
     /* ============================================================
-       MARKDOWN RENDERER (preview)
+       HELPERS
     ============================================================ */
     function esc(s) {
       return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
@@ -1248,9 +1351,6 @@
       }).join('');
     }
 
-    /* ============================================================
-       HELPERS
-    ============================================================ */
     function timeAgo(date) {
       const diff = Date.now() - date.getTime();
       if (diff < 3600000) return Math.max(1, Math.floor(diff / 60000)) + 'm ago';

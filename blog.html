@@ -4,385 +4,216 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Blog | Kreation Digital Hub</title>
-<meta name="description" content="Insights on web design, copywriting, SEO and digital growth from Kreation Digital Hub." />
+<meta name="description" content="Practical guides on web design, copywriting, SEO and growing your business online from Kreation Digital Hub." />
+<meta name="author" content="Kreation Digital Hub" />
+<link rel="canonical" href="https://kreationdigitals.com/blog.html" id="canonicalLink">
+
+<!-- Open Graph (dynamic) -->
+<meta property="og:type" content="website" id="ogType">
+<meta property="og:site_name" content="Kreation Digital Hub">
+<meta property="og:title" content="Blog | Kreation Digital Hub" id="ogTitle">
+<meta property="og:description" content="Practical guides on web design, copywriting, SEO and growing your business online." id="ogDesc">
+<meta property="og:url" content="https://kreationdigitals.com/blog.html" id="ogUrl">
+<meta property="og:image" content="https://kreationdigitals.com/favicon.jpg" id="ogImage">
+
+<!-- Twitter (dynamic) -->
+<meta name="twitter:card" content="summary_large_image" id="twCard">
+<meta name="twitter:title" content="Blog | Kreation Digital Hub" id="twTitle">
+<meta name="twitter:description" content="Practical guides on web design, copywriting, SEO and growing your business online." id="twDesc">
+<meta name="twitter:image" content="https://kreationdigitals.com/favicon.jpg" id="twImage">
+
+<!-- JSON-LD -->
+<script type="application/ld+json" id="jsonLd">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Kreation Digital Hub Blog",
+  "url": "https://kreationdigitals.com/blog.html"
+}
+</script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
   :root {
-    --primary: #003333;
-    --secondary: #39FF14;
-    --accent: #00CC99;
-    --dark: #000000;
-    --light: #FFFFFF;
-    --gray: #AAAAAA;
-    --danger: #ff3b30;
-    --gradient-start: #001a1a;
-    --gradient-end: #004d4d;
-    --neon-glow: 0 0 10px rgba(57, 255, 20, 0.7),
-                 0 0 20px rgba(57, 255, 20, 0.5),
-                 0 0 30px rgba(57, 255, 20, 0.3);
+    --primary: #003333; --secondary: #39FF14; --accent: #00CC99;
+    --dark: #000000; --light: #FFFFFF; --gray: #AAAAAA;
+    --gradient-start: #001a1a; --gradient-end: #004d4d;
+    --neon-glow: 0 0 10px rgba(57,255,20,0.7), 0 0 20px rgba(57,255,20,0.5), 0 0 30px rgba(57,255,20,0.3);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html, body { max-width: 100%; overflow-x: hidden; }
-
-  body {
-    background: var(--dark);
-    color: var(--light);
-    font-family: 'Inter', 'Montserrat', sans-serif;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
+  body { background: var(--dark); color: var(--light); font-family: 'Inter','Montserrat',sans-serif; line-height: 1.6; min-height: 100vh; }
   #particles-js { position: fixed; width: 100%; height: 100%; z-index: -2; }
+  .gradient-bg { position: fixed; inset: 0; background: linear-gradient(135deg, var(--gradient-start) 0%, var(--dark) 50%, var(--gradient-end) 100%); opacity: 0.9; z-index: -3; }
 
-  .gradient-bg {
-    position: fixed; inset: 0;
-    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--dark) 50%, var(--gradient-end) 100%);
-    opacity: 0.9; z-index: -3;
-  }
-
-  /* ================= HEADER ================= */
   header {
-    background: rgba(0, 0, 0, 0.95);
-    padding: 1.2rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: rgba(0,0,0,0.95); padding: 1.2rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
     position: sticky; top: 0; z-index: 1000;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+    backdrop-filter: blur(10px); border-bottom: 1px solid rgba(57,255,20,0.2);
     transition: all 0.3s ease;
   }
   header.scrolled { padding: 0.8rem 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
-
-  .logo {
-    font-size: 1.8rem; font-weight: 800; color: var(--light);
-    font-family: 'Montserrat', sans-serif;
-    display: flex; align-items: center; z-index: 1002;
-  }
+  .logo { font-size: 1.8rem; font-weight: 800; color: var(--light); font-family: 'Montserrat',sans-serif; display: flex; align-items: center; z-index: 1002; }
   .logo span { color: var(--secondary); position: relative; }
-  .logo span::after {
-    content: ''; position: absolute; bottom: -2px; left: 0;
-    width: 100%; height: 2px; background: var(--secondary); box-shadow: var(--neon-glow);
-  }
-
+  .logo span::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: var(--secondary); box-shadow: var(--neon-glow); }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: var(--light); text-decoration: none; font-weight: 500;
-    transition: all 0.3s; position: relative; padding: 0.5rem 0;
-    font-family: 'Montserrat', sans-serif; letter-spacing: 0.5px; font-size: 0.95rem;
-  }
+  .nav-links a { color: var(--light); text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 0.5rem 0; font-family: 'Montserrat',sans-serif; letter-spacing: 0.5px; font-size: 0.95rem; }
   .nav-links a:hover, .nav-links a.active { color: var(--secondary); text-shadow: var(--neon-glow); }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-    background: var(--secondary); transition: width 0.3s; box-shadow: var(--neon-glow);
-  }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--secondary); transition: width 0.3s; box-shadow: var(--neon-glow); }
   .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-
   .dropdown { position: relative; }
-  .dropdown-menu {
-    display: none; position: absolute; top: 100%; left: 0;
-    background: #0a0a0a; list-style: none; padding: 10px 0; min-width: 190px;
-    border-radius: 8px; border: 1px solid rgba(57,255,20,0.2);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6); z-index: 999;
-  }
+  .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #0a0a0a; list-style: none; padding: 10px 0; min-width: 190px; border-radius: 8px; border: 1px solid rgba(57,255,20,0.2); box-shadow: 0 10px 25px rgba(0,0,0,0.6); z-index: 999; }
   .dropdown:hover .dropdown-menu { display: block; }
   .dropdown-menu li a { display: block; padding: 10px 20px; color: var(--light); white-space: nowrap; }
   .dropdown-menu li a:hover { background: rgba(57,255,20,0.1); color: var(--secondary); }
   .dropdown-menu li a::after { display: none; }
+  .mobile-menu-btn { display: none; background: transparent; border: none; color: var(--light); font-size: 1.5rem; cursor: pointer; z-index: 1001; }
 
-  .mobile-menu-btn {
-    display: none; background: transparent; border: none;
-    color: var(--light); font-size: 1.5rem; cursor: pointer; z-index: 1001;
-  }
-
-  /* ================= BLOG HERO ================= */
   .blog-hero { padding: 7rem 2rem 2rem; text-align: center; }
-  .blog-hero h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 3.6rem; font-weight: 800; line-height: 1.15; margin-bottom: 1rem;
-  }
+  .blog-hero h1 { font-family: 'Montserrat',sans-serif; font-size: 3.4rem; font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
   .blog-hero h1 span { color: var(--secondary); text-shadow: var(--neon-glow); }
   .blog-hero p { color: rgba(255,255,255,0.85); font-size: 1.15rem; max-width: 650px; margin: 0 auto; }
-
   .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
 
-  /* ================= TOOLBAR ================= */
-  .blog-toolbar {
-    display: flex; flex-wrap: wrap; gap: 1rem;
-    justify-content: space-between; align-items: center;
-    margin: 3rem 0 2.5rem;
-  }
-
+  .blog-toolbar { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; margin: 3rem 0 2.5rem; }
   .tag-filters { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-  .tag-pill {
-    background: transparent; color: var(--light);
-    border: 1px solid rgba(57,255,20,0.3);
-    padding: 0.5rem 1.2rem; border-radius: 50px;
-    cursor: pointer; font-size: 0.85rem; font-family: 'Montserrat', sans-serif;
-    transition: all 0.3s;
-  }
+  .tag-pill { background: transparent; color: var(--light); border: 1px solid rgba(57,255,20,0.3); padding: 0.5rem 1.2rem; border-radius: 50px; cursor: pointer; font-size: 0.85rem; font-family: 'Montserrat',sans-serif; transition: all 0.3s; }
   .tag-pill:hover { border-color: var(--secondary); color: var(--secondary); }
-  .tag-pill.active {
-    background: var(--secondary); color: var(--dark);
-    border-color: var(--secondary); box-shadow: var(--neon-glow); font-weight: 600;
-  }
+  .tag-pill.active { background: var(--secondary); color: var(--dark); border-color: var(--secondary); box-shadow: var(--neon-glow); font-weight: 600; }
+  .blog-search { position: relative; min-width: 260px; flex: 1; max-width: 340px; }
+  .blog-search i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 0.9rem; }
+  .blog-search input { width: 100%; padding: 0.8rem 1rem 0.8rem 2.6rem; background: rgba(0,0,0,0.5); border: 1px solid rgba(57,255,20,0.25); border-radius: 50px; color: var(--light); font-size: 0.9rem; transition: all 0.3s; }
+  .blog-search input:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 15px rgba(57,255,20,0.2); }
 
-  .blog-search {
-    position: relative; min-width: 260px; flex: 1; max-width: 340px;
-  }
-  .blog-search i {
-    position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
-    color: var(--gray); font-size: 0.9rem;
-  }
-  .blog-search input {
-    width: 100%; padding: 0.8rem 1rem 0.8rem 2.6rem;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid rgba(57,255,20,0.25);
-    border-radius: 50px; color: var(--light); font-size: 0.9rem;
-    transition: all 0.3s;
-  }
-  .blog-search input:focus {
-    outline: none; border-color: var(--secondary);
-    box-shadow: 0 0 15px rgba(57,255,20,0.2);
-  }
-
-  /* ================= POST GRID ================= */
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 2.2rem;
-    padding-bottom: 6rem;
-  }
-
-  .post-card {
-    background: rgba(0, 51, 51, 0.3);
-    border: 1px solid rgba(57, 255, 20, 0.2);
-    border-radius: 16px; overflow: hidden;
-    cursor: pointer; transition: all 0.4s;
-    display: flex; flex-direction: column;
-    backdrop-filter: blur(10px);
-  }
-  .post-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(57, 255, 20, 0.5);
-    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(57,255,20,0.15);
-  }
-
+  .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.2rem; padding-bottom: 6rem; }
+  .post-card { background: rgba(0,51,51,0.3); border: 1px solid rgba(57,255,20,0.2); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.4s; display: flex; flex-direction: column; backdrop-filter: blur(10px); }
+  .post-card:hover { transform: translateY(-8px); border-color: rgba(57,255,20,0.5); box-shadow: 0 18px 35px rgba(0,0,0,0.5), 0 0 25px rgba(57,255,20,0.15); }
   .post-cover-wrap { position: relative; height: 205px; overflow: hidden; background: #001a1a; }
   .post-cover { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; display: block; }
   .post-card:hover .post-cover { transform: scale(1.08); }
-  .post-cover-fallback {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3rem; color: rgba(57,255,20,0.35);
-    background: linear-gradient(135deg, #002222, #001010);
-  }
-
+  .post-cover-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(57,255,20,0.35); background: linear-gradient(135deg, #002222, #001010); }
   .post-body { padding: 1.6rem; display: flex; flex-direction: column; flex: 1; }
-
   .post-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.9rem; }
-  .post-tag {
-    background: rgba(57, 255, 20, 0.1);
-    border: 1px solid rgba(57, 255, 20, 0.3);
-    color: var(--secondary);
-    padding: 0.15rem 0.7rem; border-radius: 20px;
-    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.4px;
-    text-transform: uppercase;
-  }
-
-  .post-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.35rem; font-weight: 700; line-height: 1.35;
-    margin-bottom: 0.8rem; color: var(--light);
-  }
-  .post-excerpt {
-    color: rgba(255,255,255,0.72); font-size: 0.92rem;
-    flex: 1; margin-bottom: 1.2rem;
-  }
-
-  .post-meta {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-top: 1rem; border-top: 1px solid rgba(57,255,20,0.15);
-    font-size: 0.78rem; color: var(--gray);
-  }
+  .post-tag { background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); color: var(--secondary); padding: 0.15rem 0.7rem; border-radius: 20px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
+  .post-title { font-family: 'Montserrat',sans-serif; font-size: 1.35rem; font-weight: 700; line-height: 1.35; margin-bottom: 0.8rem; color: var(--light); }
+  .post-excerpt { color: rgba(255,255,255,0.72); font-size: 0.92rem; flex: 1; margin-bottom: 1.2rem; }
+  .post-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid rgba(57,255,20,0.15); font-size: 0.78rem; color: var(--gray); }
   .post-meta-left { display: flex; gap: 1rem; align-items: center; }
   .post-meta i { color: var(--secondary); margin-right: 0.3rem; }
-  .post-likes-mini { color: var(--gray); }
   .post-likes-mini i { color: #ff4d6d; }
 
-  /* ================= SINGLE POST ================= */
-  .post-view { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 6rem; }
-
-  .back-btn {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    background: rgba(57,255,20,0.08);
-    border: 1px solid rgba(57,255,20,0.3);
-    color: var(--secondary); padding: 0.6rem 1.4rem; border-radius: 50px;
-    cursor: pointer; font-size: 0.9rem; margin-bottom: 2.5rem;
-    transition: all 0.3s; font-family: 'Montserrat', sans-serif;
-  }
+  .post-view { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+  .back-btn { display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.3); color: var(--secondary); padding: 0.6rem 1.4rem; border-radius: 50px; cursor: pointer; font-size: 0.9rem; margin-bottom: 2.5rem; transition: all 0.3s; font-family: 'Montserrat',sans-serif; }
   .back-btn:hover { background: var(--secondary); color: var(--dark); }
-
-  .post-view h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.7rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.2rem;
-  }
-
-  .post-view-meta {
-    display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center;
-    color: var(--gray); font-size: 0.9rem; margin-bottom: 2rem;
-  }
+  .post-view h1 { font-family: 'Montserrat',sans-serif; font-size: 2.6rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.2rem; }
+  .post-view-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; color: var(--gray); font-size: 0.9rem; margin-bottom: 2rem; }
   .post-view-meta i { color: var(--secondary); margin-right: 0.4rem; }
-
-  .post-view-cover {
-    width: 100%; border-radius: 16px; margin-bottom: 2.5rem;
-    border: 1px solid rgba(57,255,20,0.2);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-  }
-
-  .post-content {
-    font-size: 1.08rem; line-height: 1.9; color: rgba(255,255,255,0.9);
-  }
-  .post-content h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.75rem; color: var(--light);
-    margin: 2.5rem 0 1rem; padding-left: 1rem;
-    border-left: 4px solid var(--secondary);
-  }
-  .post-content h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.35rem; margin: 2rem 0 0.8rem; color: var(--secondary);
-  }
+  .post-view-cover { width: 100%; border-radius: 16px; margin-bottom: 2.5rem; border: 1px solid rgba(57,255,20,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+  .post-content { font-size: 1.08rem; line-height: 1.9; color: rgba(255,255,255,0.9); }
+  .post-content h2 { font-family: 'Montserrat',sans-serif; font-size: 1.75rem; color: var(--light); margin: 2.5rem 0 1rem; padding-left: 1rem; border-left: 4px solid var(--secondary); }
+  .post-content h3 { font-family: 'Montserrat',sans-serif; font-size: 1.35rem; margin: 2rem 0 0.8rem; color: var(--secondary); }
   .post-content p { margin-bottom: 1.5rem; }
   .post-content ul, .post-content ol { margin: 0 0 1.5rem 1.6rem; }
   .post-content li { margin-bottom: 0.6rem; }
-  .post-content blockquote {
-    border-left: 4px solid var(--secondary);
-    background: rgba(57,255,20,0.05);
-    padding: 1.2rem 1.6rem; margin: 0 0 1.5rem;
-    font-style: italic; color: rgba(255,255,255,0.85);
-    border-radius: 0 10px 10px 0;
-  }
+  .post-content blockquote { border-left: 4px solid var(--secondary); background: rgba(57,255,20,0.05); padding: 1.2rem 1.6rem; margin: 0 0 1.5rem; font-style: italic; color: rgba(255,255,255,0.85); border-radius: 0 10px 10px 0; }
   .post-content a { color: var(--secondary); text-decoration: underline; }
   .post-content img { max-width: 100%; border-radius: 12px; margin: 1rem 0; }
-  .post-content code {
-    background: rgba(0,0,0,0.6); color: var(--secondary);
-    padding: 0.15rem 0.45rem; border-radius: 5px; font-size: 0.9em;
-  }
+  .post-content code { background: rgba(0,0,0,0.6); color: var(--secondary); padding: 0.15rem 0.45rem; border-radius: 5px; font-size: 0.9em; }
   .post-content strong { color: var(--light); }
 
-  .post-footer {
-    margin-top: 3.5rem; padding-top: 2rem;
-    border-top: 1px solid rgba(57,255,20,0.2);
-    display: flex; flex-wrap: wrap; gap: 1.5rem;
-    justify-content: space-between; align-items: center;
-  }
-
-  .like-btn {
-    display: inline-flex; align-items: center; gap: 0.7rem;
-    background: rgba(57,255,20,0.06);
-    border: 1px solid rgba(57,255,20,0.3);
-    color: var(--light);
-    padding: 0.8rem 1.8rem; border-radius: 50px;
-    cursor: pointer; font-size: 1rem; font-family: 'Montserrat', sans-serif;
-    font-weight: 600; transition: all 0.3s;
-  }
+  .post-footer { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(57,255,20,0.2); display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; }
+  .like-btn { display: inline-flex; align-items: center; gap: 0.7rem; background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.3); color: var(--light); padding: 0.8rem 1.8rem; border-radius: 50px; cursor: pointer; font-size: 1rem; font-family: 'Montserrat',sans-serif; font-weight: 600; transition: all 0.3s; }
   .like-btn:hover { border-color: var(--secondary); transform: translateY(-3px); }
-  .like-btn i { transition: transform 0.3s; }
-  .like-btn.liked {
-    background: rgba(255, 77, 109, 0.15);
-    border-color: #ff4d6d; color: #ff8fa3;
-  }
+  .like-btn.liked { background: rgba(255,77,109,0.15); border-color: #ff4d6d; color: #ff8fa3; }
   .like-btn.liked i { color: #ff4d6d; }
   .like-btn.pop i { animation: heartPop 0.45s ease; }
+  @keyframes heartPop { 0% { transform: scale(1); } 40% { transform: scale(1.5); } 70% { transform: scale(0.9); } 100% { transform: scale(1); } }
 
-  @keyframes heartPop {
-    0% { transform: scale(1); }
-    40% { transform: scale(1.5); }
-    70% { transform: scale(0.9); }
-    100% { transform: scale(1); }
-  }
-
-  .share-links { display: flex; gap: 0.8rem; align-items: center; }
+  .share-links { display: flex; gap: 0.7rem; align-items: center; flex-wrap: wrap; }
   .share-links span { color: var(--gray); font-size: 0.85rem; }
-  .share-links a {
-    width: 40px; height: 40px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(255,255,255,0.05); color: var(--light);
-    transition: all 0.3s; text-decoration: none;
-  }
-  .share-links a:hover { background: var(--secondary); color: var(--dark); transform: translateY(-3px); }
+  .share-links a, .share-links button { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); color: var(--light); transition: all 0.3s; text-decoration: none; border: none; cursor: pointer; font-size: 1rem; }
+  .share-links a:hover, .share-links button:hover { transform: translateY(-3px); }
+  .share-links .s-x:hover { background: #000; color: #fff; border: 1px solid #fff; }
+  .share-links .s-fb:hover { background: #1877f2; color: #fff; }
+  .share-links .s-li:hover { background: #0a66c2; color: #fff; }
+  .share-links .s-wa:hover { background: #25d366; color: #fff; }
+  .share-links .s-ig:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; }
 
-  /* ================= STATES ================= */
-  .empty-state {
-    grid-column: 1 / -1; text-align: center; padding: 5rem 2rem; color: var(--gray);
+  /* ====== COMMENTS ====== */
+  .comments-section { margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid rgba(57,255,20,0.2); }
+  .comments-section h3 { font-family: 'Montserrat',sans-serif; font-size: 1.4rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem; }
+  .comments-section h3 i { color: var(--secondary); }
+  .comments-section h3 span { color: var(--secondary); }
+
+  .comment-form { background: rgba(0,0,0,0.35); border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; }
+  .comment-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .comment-form input, .comment-form textarea {
+    width: 100%; padding: 0.85rem 1rem; background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(57,255,20,0.25); border-radius: 9px;
+    color: var(--light); font-family: inherit; font-size: 0.92rem; transition: all 0.3s;
   }
+  .comment-form input:focus, .comment-form textarea:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 12px rgba(57,255,20,0.15); }
+  .comment-form textarea { min-height: 110px; resize: vertical; margin-bottom: 1rem; }
+  .comment-form .hp { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+  .comment-form button { background: linear-gradient(135deg, var(--secondary), var(--accent)); color: var(--dark); border: none; padding: 0.85rem 2rem; border-radius: 50px; font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.95rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .comment-form button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(57,255,20,0.3); }
+  .comment-form button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .comment-note { font-size: 0.78rem; color: var(--gray); margin-top: 0.6rem; }
+
+  .comments-list { display: flex; flex-direction: column; gap: 1rem; }
+  .comment-item { background: rgba(0,51,51,0.35); border: 1px solid rgba(57,255,20,0.15); border-left: 3px solid var(--secondary); border-radius: 10px; padding: 1.1rem 1.3rem; }
+  .comment-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; gap: 1rem; }
+  .comment-author { font-weight: 700; color: var(--light); font-size: 0.95rem; }
+  .comment-author i { color: var(--secondary); margin-right: 0.4rem; }
+  .comment-date { font-size: 0.75rem; color: var(--gray); }
+  .comment-text { color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+  .comments-empty { text-align: center; color: var(--gray); padding: 2rem; font-size: 0.95rem; }
+  .comments-empty i { font-size: 2rem; opacity: 0.3; display: block; margin-bottom: 0.6rem; }
+
+  .empty-state { grid-column: 1 / -1; text-align: center; padding: 5rem 2rem; color: var(--gray); }
   .empty-state i { font-size: 3.5rem; opacity: 0.25; margin-bottom: 1.5rem; display: block; }
   .empty-state h3 { color: var(--light); margin-bottom: 0.6rem; font-weight: 600; }
-
   .loading-wrap { grid-column: 1 / -1; text-align: center; padding: 5rem 2rem; }
-  .spinner {
-    width: 46px; height: 46px; margin: 0 auto 1.2rem;
-    border: 3px solid rgba(57,255,20,0.2);
-    border-top-color: var(--secondary);
-    border-radius: 50%; animation: spin 0.9s linear infinite;
-  }
+  .spinner { width: 46px; height: 46px; margin: 0 auto 1.2rem; border: 3px solid rgba(57,255,20,0.2); border-top-color: var(--secondary); border-radius: 50%; animation: spin 0.9s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ================= FOOTER ================= */
-  footer {
-    background: rgba(0,0,0,0.95);
-    border-top: 1px solid rgba(57,255,20,0.2);
-    padding: 3rem 0 2rem; text-align: center;
-  }
+  footer { background: rgba(0,0,0,0.95); border-top: 1px solid rgba(57,255,20,0.2); padding: 3rem 0 2rem; text-align: center; }
   .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
   .footer-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .footer-links a:hover { color: var(--secondary); }
   .copyright { color: var(--gray); font-size: 0.9rem; }
 
-  /* ================= RESPONSIVE ================= */
   @media (max-width: 992px) {
     .mobile-menu-btn { display: block; }
-    .nav-links {
-      position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
-      background: rgba(0,0,0,0.98); flex-direction: column;
-      padding: 5rem 2rem 2rem; transition: right 0.3s ease;
-      z-index: 999; box-shadow: -5px 0 15px rgba(0,0,0,0.5); margin: 0;
-    }
+    .nav-links { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: rgba(0,0,0,0.98); flex-direction: column; padding: 5rem 2rem 2rem; transition: right 0.3s ease; z-index: 999; box-shadow: -5px 0 15px rgba(0,0,0,0.5); margin: 0; }
     .nav-links.active { right: 0; }
     .nav-links a { font-size: 1.1rem; padding: 1rem 0; display: block; border-bottom: 1px solid rgba(57,255,20,0.1); }
-    .dropdown-menu {
-      position: static; display: block; background: transparent;
-      border: none; box-shadow: none; padding: 0 0 0 1rem; min-width: 0;
-    }
+    .dropdown-menu { position: static; display: block; background: transparent; border: none; box-shadow: none; padding: 0 0 0 1rem; min-width: 0; }
     .dropdown-menu li a { padding: 0.5rem 0; font-size: 0.95rem; color: var(--gray); }
-    .nav-links::before {
-      content: '\f00d'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
-      position: absolute; top: 1.5rem; right: 2rem;
-      font-size: 1.5rem; color: var(--light); cursor: pointer; z-index: 1001;
-    }
+    .nav-links::before { content: '\f00d'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: 1.5rem; right: 2rem; font-size: 1.5rem; color: var(--light); cursor: pointer; z-index: 1001; }
     body.menu-open { overflow: hidden; }
   }
 
   @media (max-width: 768px) {
     .blog-hero { padding: 5rem 1rem 1.5rem; }
-    .blog-hero h1 { font-size: 2.4rem; }
+    .blog-hero h1 { font-size: 2.3rem; }
     .blog-hero p { font-size: 1rem; }
     .container { padding: 0 1.2rem; }
     .posts-grid { grid-template-columns: 1fr; gap: 1.6rem; }
     .blog-toolbar { flex-direction: column; align-items: stretch; }
     .blog-search { max-width: 100%; }
     .post-view { padding: 2rem 1.2rem 4rem; }
-    .post-view h1 { font-size: 1.9rem; }
+    .post-view h1 { font-size: 1.85rem; }
     .post-content { font-size: 1rem; }
     header { padding: 1rem 1.2rem; }
     .logo { font-size: 1.35rem; }
+    .comment-form .row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -416,15 +247,11 @@
     </nav>
   </header>
 
-  <!-- ==================== LIST VIEW ==================== -->
   <section id="blogList">
     <div class="blog-hero">
       <h1 data-aos="fade-up">Insights &amp; <span>Ideas</span></h1>
-      <p data-aos="fade-up" data-aos-delay="150">
-        Practical guides on web design, copywriting, SEO and growing your business online.
-      </p>
+      <p data-aos="fade-up" data-aos-delay="150">Practical guides on web design, copywriting, SEO and growing your business online.</p>
     </div>
-
     <div class="container">
       <div class="blog-toolbar" data-aos="fade-up">
         <div class="tag-filters" id="tagFilters">
@@ -435,17 +262,12 @@
           <input type="text" id="blogSearch" placeholder="Search articles..." />
         </div>
       </div>
-
       <div class="posts-grid" id="postsGrid">
-        <div class="loading-wrap">
-          <div class="spinner"></div>
-          <p style="color: var(--gray);">Loading articles...</p>
-        </div>
+        <div class="loading-wrap"><div class="spinner"></div><p style="color: var(--gray);">Loading articles...</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== SINGLE POST VIEW ==================== -->
   <section id="postView" style="display: none;">
     <div class="post-view" id="postViewInner"></div>
   </section>
@@ -463,7 +285,6 @@
     </div>
   </footer>
 
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
@@ -471,8 +292,11 @@
 
   <script>
     /* ============================================================
-       FIREBASE
+       CONFIG
     ============================================================ */
+    const SITE_URL = 'https://kreationdigitals.com'; // <-- change if needed
+    const SITE_NAME = 'Kreation Digital Hub';
+
     const firebaseConfig = {
       apiKey: "AIzaSyDLrhVKnl60WcRYkpFEvDvy3-u5_WX-rCo",
       authDomain: "reviews-d3d7a.firebaseapp.com",
@@ -493,9 +317,6 @@
     let searchTerm = '';
     let currentPost = null;
 
-    /* ============================================================
-       VISITOR ID (for one-like-per-person)
-    ============================================================ */
     function getVisitorId() {
       try {
         let id = localStorage.getItem(VISITOR_KEY);
@@ -504,99 +325,117 @@
           localStorage.setItem(VISITOR_KEY, id);
         }
         return id;
-      } catch (e) {
-        return 'v_anonymous';
-      }
+      } catch (e) { return 'v_anonymous'; }
     }
 
     /* ============================================================
-       MARKDOWN-LITE RENDERER
-       Supports: # ## ### headings, **bold**, *italic*, `code`,
-       [link](url), - lists, > quotes, ![alt](img), blank-line paragraphs
+       HELPERS
     ============================================================ */
-    function escapeHtml(str) {
-      return String(str == null ? '' : str).replace(/[&<>"']/g, c => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-      }[c]));
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+    }
+    function toDate(ts) {
+      if (!ts) return null;
+      if (typeof ts.toDate === 'function') return ts.toDate();
+      if (ts.seconds) return new Date(ts.seconds * 1000);
+      const d = new Date(ts); return isNaN(d) ? null : d;
+    }
+    function formatDate(ts) {
+      const d = toDate(ts); if (!d) return 'Recently';
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+    function readingTime(t) {
+      const w = String(t || '').trim().split(/\s+/).filter(Boolean).length;
+      return Math.max(1, Math.round(w / 200)) + ' min read';
+    }
+    function excerptOf(p) {
+      if (p.excerpt && p.excerpt.trim()) return p.excerpt.trim();
+      const plain = String(p.content || '').replace(/[#*>`\-]/g, ' ').replace(/\s+/g, ' ').trim();
+      return plain.slice(0, 160) + (plain.length > 160 ? '...' : '');
     }
 
-    function inlineFormat(text) {
-      return text
+    /* ============================================================
+       MARKDOWN RENDERER
+    ============================================================ */
+    function inlineFmt(t) {
+      return t
         .replace(/!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g, '<img src="$2" alt="$1">')
         .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
         .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
         .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
         .replace(/`([^`]+)`/g, '<code>$1</code>');
     }
-
     function renderMarkdown(text) {
       if (!text) return '';
-      const blocks = String(text).split(/\n{2,}/);
-
-      return blocks.map(raw => {
-        const block = raw.trim();
-        if (!block) return '';
-
-        // Headings
-        if (/^###\s+/.test(block)) return `<h3>${inlineFormat(escapeHtml(block.replace(/^###\s+/, '')))}</h3>`;
-        if (/^##\s+/.test(block))  return `<h2>${inlineFormat(escapeHtml(block.replace(/^##\s+/, '')))}</h2>`;
-        if (/^#\s+/.test(block))   return `<h2>${inlineFormat(escapeHtml(block.replace(/^#\s+/, '')))}</h2>`;
-
-        // Blockquote
-        if (/^>\s?/.test(block)) {
-          const q = block.split('\n').map(l => l.replace(/^>\s?/, '')).join('<br>');
-          return `<blockquote>${inlineFormat(escapeHtml(q))}</blockquote>`;
+      return String(text).split(/\n{2,}/).map(raw => {
+        const b = raw.trim(); if (!b) return '';
+        if (/^###\s+/.test(b)) return `<h3>${inlineFmt(esc(b.replace(/^###\s+/, '')))}</h3>`;
+        if (/^##\s+/.test(b)) return `<h2>${inlineFmt(esc(b.replace(/^##\s+/, '')))}</h2>`;
+        if (/^#\s+/.test(b)) return `<h2>${inlineFmt(esc(b.replace(/^#\s+/, '')))}</h2>`;
+        if (/^>\s?/.test(b)) {
+          const q = b.split('\n').map(l => l.replace(/^>\s?/, '')).join('<br>');
+          return `<blockquote>${inlineFmt(esc(q))}</blockquote>`;
         }
-
-        // Unordered list
-        if (/^[-*]\s+/.test(block)) {
-          const items = block.split('\n')
-            .filter(l => /^[-*]\s+/.test(l.trim()))
-            .map(l => `<li>${inlineFormat(escapeHtml(l.trim().replace(/^[-*]\s+/, '')))}</li>`)
-            .join('');
+        if (/^[-*]\s+/.test(b)) {
+          const items = b.split('\n').filter(l => /^[-*]\s+/.test(l.trim())).map(l => `<li>${inlineFmt(esc(l.trim().replace(/^[-*]\s+/, '')))}</li>`).join('');
           return `<ul>${items}</ul>`;
         }
-
-        // Ordered list
-        if (/^\d+\.\s+/.test(block)) {
-          const items = block.split('\n')
-            .filter(l => /^\d+\.\s+/.test(l.trim()))
-            .map(l => `<li>${inlineFormat(escapeHtml(l.trim().replace(/^\d+\.\s+/, '')))}</li>`)
-            .join('');
+        if (/^\d+\.\s+/.test(b)) {
+          const items = b.split('\n').filter(l => /^\d+\.\s+/.test(l.trim())).map(l => `<li>${inlineFmt(esc(l.trim().replace(/^\d+\.\s+/, '')))}</li>`).join('');
           return `<ol>${items}</ol>`;
         }
-
-        // Paragraph
-        return `<p>${inlineFormat(escapeHtml(block)).replace(/\n/g, '<br>')}</p>`;
+        return `<p>${inlineFmt(esc(b)).replace(/\n/g, '<br>')}</p>`;
       }).join('');
     }
 
     /* ============================================================
-       HELPERS
+       SEO INJECTION
     ============================================================ */
-    function toDate(ts) {
-      if (!ts) return null;
-      if (typeof ts.toDate === 'function') return ts.toDate();
-      if (ts.seconds) return new Date(ts.seconds * 1000);
-      const d = new Date(ts);
-      return isNaN(d) ? null : d;
+    function setMeta(id, value) {
+      const el = document.getElementById(id);
+      if (el && value) el.setAttribute(el.tagName === 'LINK' ? 'href' : 'content', value);
     }
 
-    function formatDate(ts) {
-      const d = toDate(ts);
-      if (!d) return 'Recently';
-      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-    }
+    function updateSEO(post) {
+      const url = post ? `${SITE_URL}/blog.html?post=${post.id}` : `${SITE_URL}/blog.html`;
+      const title = post ? `${post.title} | ${SITE_NAME}` : `Blog | ${SITE_NAME}`;
+      const desc  = post ? excerptOf(post) : 'Practical guides on web design, copywriting, SEO and growing your business online.';
+      const img   = post?.coverImage || `${SITE_URL}/favicon.jpg`;
 
-    function readingTime(text) {
-      const words = String(text || '').trim().split(/\s+/).filter(Boolean).length;
-      return Math.max(1, Math.round(words / 200)) + ' min read';
-    }
+      document.title = title;
+      setMeta('canonicalLink', url);
+      setMeta('ogUrl', url);
+      setMeta('ogTitle', title);
+      setMeta('ogDesc', desc);
+      setMeta('ogImage', img);
+      setMeta('ogType', post ? 'article' : 'website');
+      setMeta('twTitle', title);
+      setMeta('twDesc', desc);
+      setMeta('twImage', img);
 
-    function excerptOf(post) {
-      if (post.excerpt && post.excerpt.trim()) return post.excerpt.trim();
-      const plain = String(post.content || '').replace(/[#*>`\-]/g, ' ').replace(/\s+/g, ' ').trim();
-      return plain.slice(0, 160) + (plain.length > 160 ? '...' : '');
+      // JSON-LD
+      const ld = post ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": desc,
+        "image": img,
+        "datePublished": toDate(post.createdAt)?.toISOString() || new Date().toISOString(),
+        "dateModified": toDate(post.updatedAt)?.toISOString() || toDate(post.createdAt)?.toISOString() || new Date().toISOString(),
+        "author": { "@type": "Organization", "name": post.authorName || SITE_NAME },
+        "publisher": {
+          "@type": "Organization",
+          "name": SITE_NAME,
+          "logo": { "@type": "ImageObject", "url": `${SITE_URL}/favicon.jpg` }
+        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": url }
+      } : {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": `${SITE_NAME} Blog`,
+        "url": url
+      };
+      document.getElementById('jsonLd').textContent = JSON.stringify(ld);
     }
 
     /* ============================================================
@@ -605,56 +444,33 @@
     async function loadPosts() {
       const grid = document.getElementById('postsGrid');
       try {
-        // Only published posts. No composite index required.
         const snap = await db.collection('posts').where('published', '==', true).get();
-
-        allPosts = [];
-        snap.forEach(doc => allPosts.push({ id: doc.id, ...doc.data() }));
-
-        // Sort newest first (client-side = no index needed)
+        allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
         allPosts.sort((a, b) => {
           const at = toDate(a.createdAt)?.getTime() || 0;
           const bt = toDate(b.createdAt)?.getTime() || 0;
           return bt - at;
         });
-
         if (!allPosts.length) {
-          grid.innerHTML = `
-            <div class="empty-state">
-              <i class="fas fa-feather-alt"></i>
-              <h3>No articles yet</h3>
-              <p>Check back soon — new posts are on the way.</p>
-            </div>`;
+          grid.innerHTML = `<div class="empty-state"><i class="fas fa-feather-alt"></i><h3>No articles yet</h3><p>Check back soon — new posts are on the way.</p></div>`;
           return;
         }
-
         renderTagFilters();
         renderPosts();
         loadLikeCounts();
-
       } catch (err) {
         console.error('Error loading posts:', err);
-        grid.innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-exclamation-triangle" style="color:#ff9500;"></i>
-            <h3>Could not load articles</h3>
-            <p style="font-size:0.9rem;">${escapeHtml(err.message)}</p>
-          </div>`;
+        grid.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:#ff9500;"></i><h3>Could not load articles</h3><p style="font-size:0.9rem;">${esc(err.message)}</p></div>`;
       }
     }
 
-    /* ============================================================
-       TAG FILTERS
-    ============================================================ */
     function renderTagFilters() {
       const wrap = document.getElementById('tagFilters');
       const tags = new Set();
       allPosts.forEach(p => (p.tags || []).forEach(t => tags.add(t)));
-
       const sorted = Array.from(tags).sort();
       wrap.innerHTML = `<button class="tag-pill ${activeTag === 'all' ? 'active' : ''}" data-tag="all">All Posts</button>` +
-        sorted.map(t => `<button class="tag-pill ${activeTag === t ? 'active' : ''}" data-tag="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');
-
+        sorted.map(t => `<button class="tag-pill ${activeTag === t ? 'active' : ''}" data-tag="${esc(t)}">${esc(t)}</button>`).join('');
       wrap.querySelectorAll('.tag-pill').forEach(btn => {
         btn.addEventListener('click', () => {
           activeTag = btn.dataset.tag;
@@ -665,17 +481,10 @@
       });
     }
 
-    /* ============================================================
-       RENDER POST GRID
-    ============================================================ */
     function renderPosts() {
       const grid = document.getElementById('postsGrid');
       let posts = [...allPosts];
-
-      if (activeTag !== 'all') {
-        posts = posts.filter(p => (p.tags || []).includes(activeTag));
-      }
-
+      if (activeTag !== 'all') posts = posts.filter(p => (p.tags || []).includes(activeTag));
       if (searchTerm) {
         const term = searchTerm.toLowerCase();
         posts = posts.filter(p =>
@@ -684,49 +493,34 @@
           (p.tags || []).join(' ').toLowerCase().includes(term)
         );
       }
-
       if (!posts.length) {
-        grid.innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-search"></i>
-            <h3>No matching articles</h3>
-            <p>Try a different search term or category.</p>
-          </div>`;
+        grid.innerHTML = `<div class="empty-state"><i class="fas fa-search"></i><h3>No matching articles</h3><p>Try a different search term or category.</p></div>`;
         return;
       }
-
       grid.innerHTML = posts.map(post => {
         const cover = post.coverImage
-          ? `<img class="post-cover" src="${escapeHtml(post.coverImage)}" alt="${escapeHtml(post.title)}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'post-cover-fallback\\'><i class=\\'fas fa-image\\'></i></div>'">`
+          ? `<img class="post-cover" src="${esc(post.coverImage)}" alt="${esc(post.title)}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'post-cover-fallback\\'><i class=\\'fas fa-image\\'></i></div>'">`
           : `<div class="post-cover-fallback"><i class="fas fa-image"></i></div>`;
-
-        const tags = (post.tags || []).slice(0, 3)
-          .map(t => `<span class="post-tag">${escapeHtml(t)}</span>`).join('');
-
+        const tags = (post.tags || []).slice(0, 3).map(t => `<span class="post-tag">${esc(t)}</span>`).join('');
         return `
           <article class="post-card" onclick="openPost('${post.id}')">
             <div class="post-cover-wrap">${cover}</div>
             <div class="post-body">
               ${tags ? `<div class="post-tags">${tags}</div>` : ''}
-              <h2 class="post-title">${escapeHtml(post.title || 'Untitled')}</h2>
-              <p class="post-excerpt">${escapeHtml(excerptOf(post))}</p>
+              <h2 class="post-title">${esc(post.title || 'Untitled')}</h2>
+              <p class="post-excerpt">${esc(excerptOf(post))}</p>
               <div class="post-meta">
                 <div class="post-meta-left">
                   <span><i class="far fa-calendar"></i>${formatDate(post.createdAt)}</span>
                   <span><i class="far fa-clock"></i>${readingTime(post.content)}</span>
                 </div>
-                <span class="post-likes-mini">
-                  <i class="fas fa-heart"></i><span id="likes-${post.id}">${post._likes != null ? post._likes : '·'}</span>
-                </span>
+                <span class="post-likes-mini"><i class="fas fa-heart"></i> <span id="likes-${post.id}">·</span></span>
               </div>
             </div>
           </article>`;
       }).join('');
     }
 
-    /* ============================================================
-       LIKE COUNTS (one read per post on the visible page)
-    ============================================================ */
     async function loadLikeCounts() {
       await Promise.all(allPosts.map(async post => {
         try {
@@ -734,52 +528,38 @@
           post._likes = snap.size;
           const el = document.getElementById(`likes-${post.id}`);
           if (el) el.textContent = snap.size;
-        } catch (e) {
-          // silent — count just stays as "·"
-        }
+        } catch (e) { /* ignore */ }
       }));
     }
 
     /* ============================================================
-       LIKE / UNLIKE
+       LIKE
     ============================================================ */
     async function getLikeInfo(postId) {
       const visitorId = getVisitorId();
       const snap = await db.collection('posts').doc(postId).collection('likes').get();
-      return {
-        count: snap.size,
-        liked: snap.docs.some(d => d.id === visitorId)
-      };
+      return { count: snap.size, liked: snap.docs.some(d => d.id === visitorId) };
     }
 
     window.toggleLike = async function (postId) {
       const btn = document.getElementById('likeBtn');
       if (!btn || btn.dataset.busy === '1') return;
       btn.dataset.busy = '1';
-
       const visitorId = getVisitorId();
       const ref = db.collection('posts').doc(postId).collection('likes').doc(visitorId);
-
       try {
         const doc = await ref.get();
-
         if (doc.exists) {
           await ref.delete();
         } else {
-          await ref.set({
-            likedAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
+          await ref.set({ likedAt: firebase.firestore.FieldValue.serverTimestamp() });
           btn.classList.add('pop');
           setTimeout(() => btn.classList.remove('pop'), 500);
         }
-
         const info = await getLikeInfo(postId);
         applyLikeState(btn, info);
-
-        // keep the in-memory list in sync
         const p = allPosts.find(x => x.id === postId);
         if (p) p._likes = info.count;
-
       } catch (err) {
         console.error('Like error:', err);
         alert('Could not register your like. Please try again.');
@@ -795,76 +575,162 @@
     }
 
     /* ============================================================
-       ROUTING
+       SHARE — including Instagram
     ============================================================ */
-    window.openPost = function (postId) {
-      window.location.hash = 'post/' + postId;
+    window.shareInstagram = async function () {
+      const url = currentPost ? `${SITE_URL}/blog.html?post=${currentPost.id}` : location.href;
+      const text = currentPost ? `${currentPost.title}\n${url}` : url;
+      // 1) Native share (mobile — includes Instagram if installed)
+      if (navigator.share) {
+        try { await navigator.share({ title: currentPost?.title || SITE_NAME, text: text, url }); return; }
+        catch (e) { /* user cancelled */ }
+      }
+      // 2) Fallback: copy + open Instagram web
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('✅ Link copied!\n\nInstagram has no direct web-share API — Instagram will open now. Paste the link into your story, bio, or DM.');
+        window.open('https://www.instagram.com/', '_blank');
+      } catch (e) {
+        window.prompt('Copy this link to share on Instagram:', text);
+      }
     };
 
-    function handleRoute() {
-      const match = window.location.hash.match(/^#post\/(.+)$/);
-      if (match) {
-        showPost(decodeURIComponent(match[1]));
-      } else {
-        showList();
+    /* ============================================================
+       COMMENTS
+    ============================================================ */
+    async function loadComments(postId) {
+      const list = document.getElementById('commentsList');
+      const count = document.getElementById('commentCount');
+      if (!list) return;
+      try {
+        const snap = await db.collection('posts').doc(postId).collection('comments').get();
+        const comments = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        comments.sort((a, b) => {
+          const at = toDate(a.createdAt)?.getTime() || 0;
+          const bt = toDate(b.createdAt)?.getTime() || 0;
+          return bt - at;
+        });
+        if (count) count.textContent = comments.length;
+        if (!comments.length) {
+          list.innerHTML = `<div class="comments-empty"><i class="far fa-comments"></i>No comments yet — be the first to share your thoughts!</div>`;
+          return;
+        }
+        list.innerHTML = comments.map(c => `
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-author"><i class="fas fa-user-circle"></i>${esc(c.name || 'Anonymous')}</span>
+              <span class="comment-date">${formatDate(c.createdAt)}</span>
+            </div>
+            <div class="comment-text">${esc(c.text || '')}</div>
+          </div>`).join('');
+      } catch (e) {
+        console.error('Load comments:', e);
+        list.innerHTML = `<div class="comments-empty">Could not load comments.</div>`;
       }
+    }
+
+    window.submitComment = async function (e) {
+      e.preventDefault();
+      if (!currentPost) return;
+      const nameEl = document.getElementById('commentName');
+      const emailEl = document.getElementById('commentEmail');
+      const textEl = document.getElementById('commentText');
+      const hpEl = document.getElementById('commentHp');
+      const btn = document.getElementById('commentSubmitBtn');
+
+      // Honeypot
+      if (hpEl && hpEl.value) return;
+
+      const name = nameEl.value.trim();
+      const email = emailEl.value.trim();
+      const text = textEl.value.trim();
+      if (!name || !email || !text) return;
+
+      btn.disabled = true;
+      const original = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
+
+      try {
+        await db.collection('posts').doc(currentPost.id).collection('comments').add({
+          name, email, text,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        nameEl.value = ''; emailEl.value = ''; textEl.value = '';
+        await loadComments(currentPost.id);
+        btn.innerHTML = '<i class="fas fa-check"></i> Comment posted!';
+        setTimeout(() => { btn.innerHTML = original; btn.disabled = false; }, 1500);
+      } catch (err) {
+        console.error('Comment error:', err);
+        alert('Could not post comment: ' + err.message);
+        btn.innerHTML = original;
+        btn.disabled = false;
+      }
+    };
+
+    /* ============================================================
+       ROUTING (query string for SEO)
+    ============================================================ */
+    window.openPost = function (postId) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('post', postId);
+      window.location.href = url.toString();
+    };
+
+    function getPostIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('post');
+    }
+
+    function handleRoute() {
+      const id = getPostIdFromUrl();
+      if (id) showPost(id);
+      else showList();
     }
 
     function showList() {
       document.getElementById('blogList').style.display = 'block';
       document.getElementById('postView').style.display = 'none';
-      document.title = 'Blog | Kreation Digital Hub';
-      window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+      updateSEO(null);
+      window.scrollTo(0, 0);
     }
 
     async function showPost(postId) {
       let post = allPosts.find(p => p.id === postId);
-
-      // Deep-link: post may not be loaded yet
       if (!post) {
         try {
           const doc = await db.collection('posts').doc(postId).get();
-          if (!doc.exists || !doc.data().published) {
-            window.location.hash = '';
-            return;
-          }
+          if (!doc.exists || !doc.data().published) { showList(); return; }
           post = { id: doc.id, ...doc.data() };
-        } catch (e) {
-          window.location.hash = '';
-          return;
-        }
+        } catch (e) { showList(); return; }
       }
-
       currentPost = post;
-
       document.getElementById('blogList').style.display = 'none';
-      const view = document.getElementById('postView');
-      view.style.display = 'block';
+      document.getElementById('postView').style.display = 'block';
+      updateSEO(post);
 
-      document.title = (post.title || 'Article') + ' | Kreation Digital Hub';
-
-      const shareUrl = encodeURIComponent(window.location.href);
-      const shareText = encodeURIComponent(post.title || '');
+      const url = `${SITE_URL}/blog.html?post=${post.id}`;
+      const eUrl = encodeURIComponent(url);
+      const eTitle = encodeURIComponent(post.title || '');
 
       const inner = document.getElementById('postViewInner');
       inner.innerHTML = `
-        <button class="back-btn" onclick="window.location.hash=''">
+        <button class="back-btn" onclick="history.pushState({}, '', 'blog.html'); handleRoute();">
           <i class="fas fa-arrow-left"></i> Back to all articles
         </button>
 
         ${(post.tags || []).length ? `<div class="post-tags" style="margin-bottom:1.2rem;">
-          ${(post.tags || []).map(t => `<span class="post-tag">${escapeHtml(t)}</span>`).join('')}
+          ${(post.tags || []).map(t => `<span class="post-tag">${esc(t)}</span>`).join('')}
         </div>` : ''}
 
-        <h1>${escapeHtml(post.title || 'Untitled')}</h1>
+        <h1>${esc(post.title || 'Untitled')}</h1>
 
         <div class="post-view-meta">
-          <span><i class="far fa-user"></i>${escapeHtml(post.authorName || 'Kreation Digital Hub')}</span>
+          <span><i class="far fa-user"></i>${esc(post.authorName || SITE_NAME)}</span>
           <span><i class="far fa-calendar"></i>${formatDate(post.createdAt)}</span>
           <span><i class="far fa-clock"></i>${readingTime(post.content)}</span>
         </div>
 
-        ${post.coverImage ? `<img class="post-view-cover" src="${escapeHtml(post.coverImage)}" alt="${escapeHtml(post.title)}" onerror="this.style.display='none'">` : ''}
+        ${post.coverImage ? `<img class="post-view-cover" src="${esc(post.coverImage)}" alt="${esc(post.title)}" onerror="this.style.display='none'">` : ''}
 
         <div class="post-content">${renderMarkdown(post.content)}</div>
 
@@ -877,86 +743,87 @@
 
           <div class="share-links">
             <span>Share:</span>
-            <a href="https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}" target="_blank" rel="noopener" title="Share on X"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank" rel="noopener" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}" target="_blank" rel="noopener" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://wa.me/?text=${shareText}%20${shareUrl}" target="_blank" rel="noopener" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a class="s-x" href="https://twitter.com/intent/tweet?text=${eTitle}&url=${eUrl}" target="_blank" rel="noopener" title="Share on X"><i class="fab fa-twitter"></i></a>
+            <a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=${eUrl}" target="_blank" rel="noopener" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a class="s-li" href="https://www.linkedin.com/sharing/share-offsite/?url=${eUrl}" target="_blank" rel="noopener" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a class="s-wa" href="https://wa.me/?text=${eTitle}%20${eUrl}" target="_blank" rel="noopener" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <button class="s-ig" onclick="shareInstagram()" title="Share on Instagram"><i class="fab fa-instagram"></i></button>
+          </div>
+        </div>
+
+        <div class="comments-section">
+          <h3><i class="fas fa-comments"></i> Comments (<span id="commentCount">0</span>)</h3>
+
+          <form class="comment-form" id="commentForm" onsubmit="submitComment(event)">
+            <div class="row">
+              <input type="text" id="commentName" placeholder="Your name *" required maxlength="60">
+              <input type="email" id="commentEmail" placeholder="Your email * (not published)" required maxlength="120">
+            </div>
+            <textarea id="commentText" placeholder="Share your thoughts... *" required maxlength="1200"></textarea>
+            <input type="text" id="commentHp" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="submit" id="commentSubmitBtn"><i class="fas fa-paper-plane"></i> Post Comment</button>
+            <div class="comment-note">Your email stays private — it's only used by the site admin.</div>
+          </form>
+
+          <div class="comments-list" id="commentsList">
+            <div class="comments-empty"><i class="far fa-comments"></i>Loading comments...</div>
           </div>
         </div>
       `;
 
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      window.scrollTo(0, 0);
 
-      // Resolve the like state
       try {
         const info = await getLikeInfo(post.id);
         const btn = document.getElementById('likeBtn');
         if (btn) applyLikeState(btn, info);
-      } catch (e) {
-        console.warn('Could not load likes:', e);
-      }
+      } catch (e) { console.warn('like load', e); }
+
+      loadComments(post.id);
     }
 
     /* ============================================================
-       SEARCH
+       SEARCH + INIT
     ============================================================ */
-    document.getElementById('blogSearch').addEventListener('input', (e) => {
+    document.getElementById('blogSearch').addEventListener('input', e => {
       searchTerm = e.target.value.trim();
       renderPosts();
     });
 
-    /* ============================================================
-       INIT
-    ============================================================ */
     AOS.init({ duration: 900, once: true, offset: 80 });
 
     particlesJS('particles-js', {
       particles: {
         number: { value: 70, density: { enable: true, value_area: 800 } },
-        color: { value: "#39FF14" },
-        shape: { type: "polygon", polygon: { nb_sides: 6 } },
-        opacity: { value: 0.25, random: true },
-        size: { value: 3, random: true },
+        color: { value: "#39FF14" }, shape: { type: "polygon", polygon: { nb_sides: 6 } },
+        opacity: { value: 0.25, random: true }, size: { value: 3, random: true },
         line_linked: { enable: true, distance: 150, color: "#39FF14", opacity: 0.3, width: 1 },
         move: { enable: true, speed: 1.8, direction: "none", random: true, out_mode: "out" }
       },
-      interactivity: {
-        detect_on: "canvas",
-        events: { onhover: { enable: true, mode: "grab" }, resize: true },
-        modes: { grab: { distance: 140, line_linked: { opacity: 0.8 } } }
-      },
+      interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "grab" }, resize: true }, modes: { grab: { distance: 140, line_linked: { opacity: 0.8 } } } },
       retina_detect: true
     });
 
-    // Header scroll effect
     const headerEl = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-      headerEl.classList.toggle('scrolled', window.scrollY > 80);
-    });
+    window.addEventListener('scroll', () => headerEl.classList.toggle('scrolled', window.scrollY > 80));
 
-    // Mobile menu
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinksEl = document.querySelector('.nav-links');
     mobileMenuBtn.addEventListener('click', () => {
       navLinksEl.classList.toggle('active');
       document.body.classList.toggle('menu-open');
       const icon = mobileMenuBtn.querySelector('i');
-      icon.classList.toggle('fa-bars');
-      icon.classList.toggle('fa-times');
+      icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times');
     });
-    navLinksEl.addEventListener('click', (e) => {
+    navLinksEl.addEventListener('click', e => {
       if (e.target === navLinksEl || e.target.classList.contains('fa-times')) {
-        navLinksEl.classList.remove('active');
-        document.body.classList.remove('menu-open');
+        navLinksEl.classList.remove('active'); document.body.classList.remove('menu-open');
         const icon = mobileMenuBtn.querySelector('i');
-        icon.classList.add('fa-bars');
-        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars'); icon.classList.remove('fa-times');
       }
     });
 
-    window.addEventListener('hashchange', handleRoute);
-
-    // Boot
+    window.addEventListener('popstate', handleRoute);
     loadPosts().then(handleRoute);
   </script>
 </body>
